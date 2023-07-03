@@ -62,6 +62,67 @@ part2.loc[part2['player.number_variables']==3, 'indic_3'] = 1
 part2.loc[part2['player.number_variables']==4, 'indic_4'] = 1
 part2.loc[part2['player.number_variables']==5, 'indic_5'] = 1
 
+# for data in part 2 create a column that indicates the variable that they chose to reveal when they could only reveal one variable
+part2.loc[(part2['player.number_variables']==1) & (part2['player.chose_x1']==1), 'single_variable'] = 1
+part2.loc[(part2['player.number_variables']==1) & (part2['player.chose_x2']==1), 'single_variable'] = 2
+part2.loc[(part2['player.number_variables']==1) & (part2['player.chose_x3']==1), 'single_variable'] = 3
+part2.loc[(part2['player.number_variables']==1) & (part2['player.chose_x4']==1), 'single_variable'] = 4
+part2.loc[(part2['player.number_variables']==1) & (part2['player.chose_x5']==1), 'single_variable'] = 5
+
+###############
+# create a dataframe with all the pairs that played together
+###############
+
+# There was an issue in the code when pairs moved on to the second part of the experiment. 
+# Not all pairs got the same observations. 
+# It had to do with how long some players were waiting for their partners to catch up. 
+# So I will filter out all pairs for which this happened.
+
+# get a data table with the pairs and compute wether they are polarized or not. 
+# split into player 1 table and player 2 table. 
+# Rename the columns to indicate which player it is and merge them to add columns to each group
+player1 = all_rounds.loc[all_rounds['player.id_in_group']==1, ['participant.code', 'player.guess', 'player.correct',
+                                                               'player.chose_x1', 'player.chose_x2', 'player.chose_x3',
+                                                               'player.chose_x4', 'player.chose_x5', 'revealed_variables_count',
+                                                               'round_number_modif', 'player.number_variables',
+                                                               'group.id_in_subsession', 
+                                                               'player.x1', 'player.x2', 'player.x3', 
+                                                               'player.x4', 'player.x5', 'player.y', 'session.code']]
+
+player1.rename(columns={'participant.code':'p1_code', 'player.guess':'p1_guess', 'player.correct':'p1_correct', 
+                        'player.chose_x1':'p1_chose_x1', 'player.chose_x2':'p1_chose_x2', 'player.chose_x3':'p1_chose_x3', 'player.chose_x4':'p1__chose_x4',
+                       'player.chose_x5':'p1_chose_x5', 'player.number_variables':'p1_number_variables', 'revealed_variables_count':'p1_revealed', 
+                       'player.x1':'p1_x1', 'player.x2':'p1_x2', 'player.x3':'p1_x3', 'player.x4':'p1_x4', 'player.x5':'p1_x5', 'player.y':'p1_y'}, inplace=True)
+
+player2 = all_rounds.loc[all_rounds['player.id_in_group']==2, ['participant.code', 'player.guess', 'player.correct',
+                                                               'player.chose_x1', 'player.chose_x2', 'player.chose_x3',
+                                                               'player.chose_x4', 'player.chose_x5', 'revealed_variables_count',
+                                                               'round_number_modif', 'player.number_variables',
+                                                               'group.id_in_subsession', 
+                                                               'player.x1', 'player.x2', 'player.x3', 
+                                                               'player.x4', 'player.x5', 'player.y', 'session.code']]
+
+
+player2.rename(columns={'participant.code':'p2_code', 'player.guess':'p2_guess', 'player.correct':'p2_correct', 
+                        'player.chose_x1':'p2_chose_x1', 'player.chose_x2':'p2_chose_x2', 'player.chose_x3':'p2_chose_x3', 'player.chose_x4':'p2_chose_x4',
+                       'player.chose_x5':'p2_chose_x5', 'player.number_variables':'p2_number_variables', 'revealed_variables_count':'p2_revealed',
+                       'player.x1':'p2_x1', 'player.x2':'p2_x2', 'player.x3':'p2_x3', 'player.x4':'p2_x4', 'player.x5':'p2_x5', 'player.y':'p2_y'}, inplace=True)
+
+# merge the two tables
+pairs = player1.merge(player2, on=['group.id_in_subsession', 'round_number_modif', 'session.code'])
+
+# keep only the pairs that got the same observations
+pairs[(pairs['p2_x1']==pairs['p1_x1'])&(pairs['p2_x2']==pairs['p1_x2'])&(pairs['p2_x3']==pairs['p1_x3'])&(pairs['p2_x4']==pairs['p1_x4'])]
+
+# create a column that indicates whether the pair is polarized or not
+pairs.loc[pairs['p1_guess']!=pairs['p2_guess'], 'polarized']=1
+pairs.loc[pairs['p1_guess']==pairs['p2_guess'], 'polarized']=0
+
+
+
+
+# Save all the data in clean format
+
 path_p1 = Path('data/clean/part1.csv')  
 path_p1.parent.mkdir(parents=True, exist_ok=True)  
 part1.to_csv(path_p1)
@@ -74,3 +135,6 @@ path_all = Path('data/clean/all.csv')
 path_all.parent.mkdir(parents=True, exist_ok=True)  
 all_rounds.to_csv(path_all)
 
+path_pairs = Path('data/clean/pairs.csv')  
+path_pairs.parent.mkdir(parents=True, exist_ok=True)  
+pairs.to_csv(path_pairs)
