@@ -17,7 +17,7 @@ clean_data += $(all)
 clean_data += $(pairs)
 
 # recipe that describes how to build the files from the raw data
-$(part1) $(part2) $(all) $(pairs): data/raw/Part1_2023-06-05.csv data/raw/Part2_2023-06-05.csv data/raw/Part1_2023-06-08_1.csv data/raw/Part2_2023-06-08_1.csv data/scripts/clean_data.py
+$(part1) $(part2) $(all) $(pairs): data/raw/Part1_2023-06-05.csv data/raw/Part2_2023-06-05.csv data/raw/Part1_2023-06-08_1.csv data/raw/Part2_2023-06-08_1.csv $(model_accuracy) data/scripts/clean_data.py
 	@echo "Cleaning our first file!"
 	python data/scripts/clean_data.py
 
@@ -27,7 +27,7 @@ clean_data: $(clean_data)
 
 
 ###############################################
-# Exploring data
+# computing objects
 ###############################################
 
 # files to build:
@@ -41,6 +41,13 @@ assigned_variables = computed_objects/figures/assigned_variables.png
 assigned_variables_time = computed_objects/figures/assigned_variables_time.png
 revealed_available = computed_objects/figures/revealed_available.png
 
+model_accuracy = computed_objects/tables/model_accuracy.csv
+
+
+# recipe that describes how to build the model_accuracy
+$(model_accuracy): data/scripts/simulation_accuracy.py
+	@echo "Model accuracy"
+	python data/scripts/simulation_accuracy.py
 
 # initialize plots as empty
 plots =
@@ -56,18 +63,18 @@ plots += $(assigned_variables_time)
 plots += $(revealed_available)
 
 # recipe that describes how to build the learning plots from the clean data
-$(learning_part1) $(learning_all): data/clean/part1.csv data/clean/all.csv analysis/learning_plots.py
+$(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
 	@echo "Learning plots"
 	python analysis/learning_plots.py
 
 
 # recipe that describes how to build the variable choice plots from the clean data
-$(single_variable_time) $(variable_choices_average) $(variable_choices_time): data/clean/part2.csv analysis/variable_choices.py
+$(single_variable_time) $(variable_choices_average) $(variable_choices_time): $(part2) analysis/variable_choices.py
 	@echo "Variable choice plots"
 	python analysis/variable_choices.py
 
 # recipe that describes how to build the effects aggregate plots from the clean data
-$(revealed_variables_pooled) $(assigned_variables) $(assigned_variables_time) $(revealed_available): data/clean/part2.csv analysis/effects_aggregate.py
+$(revealed_variables_pooled) $(assigned_variables) $(assigned_variables_time) $(revealed_available): $(part2) analysis/effects_aggregate.py
 	@echo "Effects plots"
 	python analysis/effects_aggregate.py
 

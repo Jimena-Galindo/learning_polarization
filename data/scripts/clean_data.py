@@ -118,6 +118,13 @@ pairs[(pairs['p2_x1']==pairs['p1_x1'])&(pairs['p2_x2']==pairs['p1_x2'])&(pairs['
 pairs.loc[pairs['p1_guess']!=pairs['p2_guess'], 'polarized']=1
 pairs.loc[pairs['p1_guess']==pairs['p2_guess'], 'polarized']=0
 
+## Load the data from the simulation of model accuracy
+model_accuracy = pd.read_csv('computed_objects/tables/model_accuracy.csv', dtype={'index':str})
+model_accuracy = model_accuracy[['index', 'accuracy']]
+model_accuracy.rename(columns={'index':'model'}, inplace=True)
+# assign to the data
+part2 = part2.merge(model_accuracy, on='model', how='outer')
+
 
 
 
