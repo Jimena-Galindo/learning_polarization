@@ -4,6 +4,8 @@
 import numpy as np
 import scipy.stats as stats
 import scipy as sp
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
