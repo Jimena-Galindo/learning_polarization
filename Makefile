@@ -6,7 +6,7 @@
 part1 = data/clean/part1.csv
 part2 = data/clean/part2.csv
 all = data/clean/all.csv
-all = data/clean/pairs.csv
+pairs = data/clean/pairs.csv
 
 # initialize clean_data as empty
 clean_data = 
@@ -36,6 +36,11 @@ learning_all = computed_objects/figures/learning_all.png
 single_variable_time = computed_objects/figures/single_variable_time.png
 variable_choices_average = computed_objects/figures/variable_choices_average.png
 variable_choices_time = computed_objects/figures/variable_choices_time.png
+revealed_variables_pooled = computed_objects/figures/revealed_variables_pooled.png
+assigned_variables = computed_objects/figures/assigned_variables.png
+assigned_variables_time = computed_objects/figures/assigned_variables_time.png
+revealed_available = computed_objects/figures/revealed_available.png
+
 
 # initialize plots as empty
 plots =
@@ -45,6 +50,10 @@ plots += $(learning_all)
 plots += $(single_variable_time)
 plots += $(variable_choices_average)
 plots += $(variable_choices_time)
+plots += $(revealed_variables_pooled)
+plots += $(assigned_variables)
+plots += $(assigned_variables_time)
+plots += $(revealed_available)
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): data/clean/part1.csv data/clean/all.csv analysis/learning_plots.py
@@ -56,6 +65,11 @@ $(learning_part1) $(learning_all): data/clean/part1.csv data/clean/all.csv analy
 $(single_variable_time) $(variable_choices_average) $(variable_choices_time): data/clean/part2.csv analysis/variable_choices.py
 	@echo "Variable choice plots"
 	python analysis/variable_choices.py
+
+# recipe that describes how to build the effects aggregate plots from the clean data
+$(revealed_variables_pooled) $(assigned_variables) $(assigned_variables_time) $(revealed_available): data/clean/part2.csv analysis/effects_aggregate.py
+	@echo "Effects plots"
+	python analysis/effects_aggregate.py
 
 # This recipe concludes when plots are built
 plots: $(plots)
