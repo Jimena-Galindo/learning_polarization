@@ -1,4 +1,7 @@
 # sort subjects by their performance in the first part of the experiment
+# this script creates a variable that indicates whether they were better than random in the first 20 rounds and plots
+# the effect of revealing/allowing an additional variable.
+
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 # import libraries

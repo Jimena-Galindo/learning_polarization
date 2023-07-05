@@ -45,7 +45,9 @@ performance_part1 = computed_objects/tables/performance_part1.csv
 p1_performance_throughout = computed_objects/tables/p1_performance_throughout.csv
 p1_performace_effect_assigned = computed_objects/figures/p1_performace_effect_assigned.png
 p1_performace_effect_revealed = computed_objects/figures/p1_performace_effect_revealed.png
-
+p2_correct_rounds = computed_objects/tables/p2_correct_rounds.csv
+p2_performance_effect_revealed = computed_objects/figures/p2_performance_effect_revealed.png
+p2_performance_effect_assigned = computed_objects/figures/p2_performance_effect_assigned.png
 
 # recipe that describes how to build the model_accuracy
 $(model_accuracy): data/scripts/simulation_accuracy.py
@@ -68,6 +70,9 @@ plots += $(p1_performance_throughout)
 plots += $(performance_part1)
 plots += $(p1_performace_effect_assigned)
 plots += $(p1_performace_effect_revealed)
+plots += $(p2_correct_rounds)
+plots += $(p2_performance_effect_revealed)
+plots += $(p2_performance_effect_assigned)
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
@@ -85,12 +90,15 @@ $(revealed_variables_pooled) $(assigned_variables) $(assigned_variables_time) $(
 	@echo "Effects plots"
 	python analysis/effects_aggregate.py
 
-#recipe that describes hot yo build the part1 perfomance plots
+# recipe that describes hot yo build the part1 perfomance plots
 $(p1_performance_throughout) $(performance_part1) $(p1_performace_effect_assigned) $(p1_performace_effect_revealed): $(part1) analysis/part1_performance.py
 	@echo "Part1 performance plots"
 	python analysis/part1_performance.py
 
-
+# recipe that describes how to build the part2 perfomance plots
+$(p2_correct_rounds) $(p2_performance_effect_revealed) $(p2_performance_effect_assigned): $(part2) $(part1) $(all) analysis/part2_performance.py
+	@echo "Part2 performance plots"
+	python analysis/part2_performance.py
 
 # This recipe concludes when plots are built
 plots: $(plots)
