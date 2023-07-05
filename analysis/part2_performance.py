@@ -27,8 +27,7 @@ all_rounds = all_rounds.merge(guesses2040, on='participant.code').rename(columns
 all_rounds.loc[all_rounds['2040_count']>10, 'better_random_2040'] = 1
 all_rounds.loc[all_rounds['2040_count']<=10, 'better_random_2040'] = 0
 # plot the performance across all rounds by performance in the first 20 rounds of part 2
-sns.lmplot(data=all_rounds[all_rounds['round_number_modif']<=60], x="round_number_modif", y="player.correct", 
- x_bins=10, hue='better_random_2040')
+sns.lmplot(data=all_rounds[all_rounds['round_number_modif']<=60], x="round_number_modif", y="player.correct", x_bins=10, hue='better_random_2040')
 plt.savefig('computed_objects/figures/p2_correct_rounds.png')
 
 # add the indicator to the part2 table
@@ -38,27 +37,25 @@ part2.loc[part2['2040_count']<=10, 'better_random_2040'] = 0
 
 # Accuracy wrt number of variables that they chose to reveal and by performance in part2
 fig, axs = plt.subplots()
-axs = sns.pointplot(data=part2[part2['subsession.round_number']>0], x='revealed_variables_count', y='player.correct', 
-                    hue='better_random_2040', estimator='mean', join=False)
-plt.ylim(.35, .75)
+axs = sns.pointplot(data=part2, x='revealed_variables_count', y='player.correct', hue='better_random_2040', eestimator='mean', join=False)
+axs.set_ylim(.35, .75)
 
-plt.axhline(.5, 0, 1, color = 'grey')
+axs.axhline(.5, 0, 1, color = 'grey')
 axs.set_xlabel('number of revealed variables')
 axs.set_ylabel('share of correct guesses')
 
-fig.show()
 fig.savefig('computed_objects/figures/p2_performance_effect_revealed.png')
 
 # Accuracy wrt number of variables that they were allowed to choose and by performance in part2
 fig, axs = plt.subplots()
 axs = sns.pointplot(data=part2[part2['subsession.round_number']>0], x='player.number_variables', y='player.correct', 
-                    hue='better_random_2040', estimator='mean', join=False)
+                    hue='better_random_2040', eestimator='mean', join=False)
 plt.ylim(.35, .75)
 
 plt.axhline(.5, 0, 1, color = 'grey')
 axs.set_xlabel('number of allowed variables')
 axs.set_ylabel('share of correct guesses')
-fig.show()
+
 
 fig.savefig('computed_objects/figures/p2_performance_effect_allowed.png')
 
@@ -79,16 +76,17 @@ print('the share of subjects who do better than random in rounds 20 - 40 is ' + 
 # one variable models and two variable models
 fig, axs = plt.subplots(2, 1, figsize=(10, 7))
 sns.pointplot(data=part2[(part2['player.number_variables']==1) & (part2['subsession.round_number']>20)], x='model', y='player.correct', 
-              hue='better_random_2040', estimator='mean', join=False, ax=axs[0])
+              hue='better_random_2040', eestimator='mean', join=False, ax=axs[0])
 axs[0].set_ylim(0, 1)
 axs[0].set_title('performance by models with 1 variable chosen (after 40 rounds)')
 axs[0].axhline(.5, 0, 1, color = 'grey')
 
 sns.pointplot(data=part2[(part2['player.number_variables']==2) & (part2['subsession.round_number']>20)], x='model', y='player.correct', 
-              hue='better_random_2040', estimator='mean', join=False, ax=axs[1])
+              hue='better_random_2040', eestimator='mean', join=False, ax=axs[1])
 axs[1].set_ylim(0, 1)
 axs[1].set_title('performance by models with 1 variable chosen (after 40 rounds)')
 axs[1].axhline(.5, 0, 1, color = 'grey')
 
+fig.savefig('computed_objects/figures/p2_performance_by_model.png')
 
 

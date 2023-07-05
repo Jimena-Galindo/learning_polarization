@@ -31,23 +31,24 @@ clean_data: $(clean_data)
 ###############################################
 
 # files to build:
-learning_part1 = computed_objects/figures/learning_part1.png
-learning_all = computed_objects/figures/learning_all.png
-single_variable_time = computed_objects/figures/single_variable_time.png
-variable_choices_average = computed_objects/figures/variable_choices_average.png
-variable_choices_time = computed_objects/figures/variable_choices_time.png
-revealed_variables_pooled = computed_objects/figures/revealed_variables_pooled.png
-assigned_variables = computed_objects/figures/assigned_variables.png
-assigned_variables_time = computed_objects/figures/assigned_variables_time.png
-revealed_available = computed_objects/figures/revealed_available.png
-model_accuracy = computed_objects/tables/model_accuracy.csv
-performance_part1 = computed_objects/tables/performance_part1.csv
-p1_performance_throughout = computed_objects/tables/p1_performance_throughout.csv
-p1_performace_effect_assigned = computed_objects/figures/p1_performace_effect_assigned.png
-p1_performace_effect_revealed = computed_objects/figures/p1_performace_effect_revealed.png
-p2_correct_rounds = computed_objects/tables/p2_correct_rounds.csv
+learning_part1                 = computed_objects/figures/learning_part1.png
+learning_all                   = computed_objects/figures/learning_all.png
+single_variable_time           = computed_objects/figures/single_variable_time.png
+variable_choices_average       = computed_objects/figures/variable_choices_average.png
+variable_choices_time          = computed_objects/figures/variable_choices_time.png
+revealed_variables_pooled      = computed_objects/figures/revealed_variables_pooled.png
+assigned_variables             = computed_objects/figures/assigned_variables.png
+assigned_variables_time        = computed_objects/figures/assigned_variables_time.png
+revealed_available             = computed_objects/figures/revealed_available.png
+model_accuracy                 = computed_objects/tables/model_accuracy.csv
+performance_part1              = computed_objects/figrues/performance_part1.png
+p1_performance_throughout      = computed_objects/figures/p1_performance_throughout.png
+p1_performace_effect_assigned  = computed_objects/figures/p1_performace_effect_assigned.png
+p1_performace_effect_revealed  = computed_objects/figures/p1_performace_effect_revealed.png
+p2_correct_rounds              = computed_objects/figures/p2_correct_rounds.png
 p2_performance_effect_revealed = computed_objects/figures/p2_performance_effect_revealed.png
 p2_performance_effect_assigned = computed_objects/figures/p2_performance_effect_assigned.png
+p2_performance_by_model        = computed_objects/figures/p2_performance_by_model.png
 
 # recipe that describes how to build the model_accuracy
 $(model_accuracy): data/scripts/simulation_accuracy.py
@@ -73,6 +74,7 @@ plots += $(p1_performace_effect_revealed)
 plots += $(p2_correct_rounds)
 plots += $(p2_performance_effect_revealed)
 plots += $(p2_performance_effect_assigned)
+plots += $(p2_performance_by_model)
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
@@ -96,7 +98,7 @@ $(p1_performance_throughout) $(performance_part1) $(p1_performace_effect_assigne
 	python analysis/part1_performance.py
 
 # recipe that describes how to build the part2 perfomance plots
-$(p2_correct_rounds) $(p2_performance_effect_revealed) $(p2_performance_effect_assigned): $(part2) $(part1) $(all) analysis/part2_performance.py
+$(p2_correct_rounds) $(p2_performance_effect_revealed) $(p2_performance_effect_assigned) $(p2_performance_by_model): $(part2) $(part1) $(all) analysis/part2_performance.py
 	@echo "Part2 performance plots"
 	python analysis/part2_performance.py
 
