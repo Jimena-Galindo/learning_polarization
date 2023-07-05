@@ -66,7 +66,7 @@ regression_predicted_polariz   = computed_objects/tables/regression_predicted_po
 ttest_predicted_polariz 	   = computed_objects/tables/ttest_predicted_polariz.txt
 polarization 				   = computed_objects/figures/polarization.png
 predicted_polarization_ttest   = computed_objects/tables/predicted_polarization_ttest.txt
-
+model_count                    = computed_objects/tables/model_count.png
 
 # recipe that describes how to build the model_accuracy
 $(model_accuracy): data/scripts/simulation_accuracy.py
@@ -106,6 +106,7 @@ plots += $(regression_predicted_polariz)
 plots += $(ttest_predicted_polariz)
 plots += $(polarization)
 plots += $(predicted_polarization_ttest)
+plots += $(model_count)
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
@@ -149,6 +150,11 @@ $(model_choices_2vars) $(model_choices_all) $(accuracy_rounds): $(part2) $(part1
 $(polarization_rounds_predicted) $(regression_predicted_polariz) $(ttest_predicted_polariz) $(polarization) $(predicted_polarization_ttest): $(part2) $(part1) $(all) $(pairs) analysis/polarization.py
 	@echo "Polarization plots"
 	python analysis/polarization.py
+
+# recipe that describes how to build the model count plots
+$(model_count): $(part2) $(part1) $(all) analysis/model_exploration.py
+	@echo "Model count plots"
+	python analysis/model_exploration.py
 
 
 

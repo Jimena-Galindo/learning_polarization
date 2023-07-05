@@ -14,5 +14,5 @@ from stargazer.stargazer import Stargazer
 # load the data in long format for each part
 part1 = pd.read_csv('data/clean/part1.csv')
 all_rounds = pd.read_csv('data/clean/all.csv')
-part2 = pd.read_csv('data/clean/part2.csv')
+part2 = pd.read_csv('data/clean/part2.csv', dtype={'model': str})
 
