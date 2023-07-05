@@ -110,3 +110,19 @@ hypotheses = 'indic_1-.5 = 0, indic_2 - indic_1 = 0, indic_3 - indic_2 = 0, indi
 t_test = res_assigned.t_test(hypotheses)
 print(t_test)
 
+fig, axs = plt.subplots(2, 1, figsize=(25, 15))
+sns.pointplot(data=part2[(part2['player.number_variables']==2) ], x='model', y='player.correct',
+              eestimator='mean', join=False, ax=axs[0])
+axs[0].set_ylim(0, 1.05)
+axs[0].set_title('performance by 2-variable model chosen')
+axs[0].axhline(.5, 0, 1, color = 'grey')
+
+sns.histplot(data=part2[(part2['player.number_variables']==2) ], x='model', stat='probability',
+              discrete=True, ax=axs[1], hue='better_random_2040', multiple='stack')
+
+axs[1].set_title('model choices')
+
+sns.lineplot(data=part2[(part2['player.number_variables']==2) ], x='model', y='accuracy', ax=axs[0], 
+              color='black')
+
+fig.savefig('computed_objects/figures/p2_perfotmance_model_choices_2var.png')
