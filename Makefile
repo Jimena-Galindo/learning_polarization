@@ -57,6 +57,10 @@ ttest_revealed                 = computed_objects/tables/ttest_revealed.txt
 model_choices_2vars            = computed_objects/figures/model_choices_2vars.png
 model_choices_all 		       = computed_objects/figures/model_choices_all.png
 accuracy_rounds                = computed_objects/figures/accuracy_rounds.png
+polarization_rounds_predicted  = computed_objects/figures/polarization_rounds_predicted.png
+regression_predicted_polariz   = computed_objects/tables/regression_predicted_polariz.txt
+ttest_predicted_polariz 	   = computed_objects/tables/ttest_predicted_polariz.txt
+polarization 				   = computed_objects/tables/polarization.txt
 
 
 # recipe that describes how to build the model_accuracy
@@ -92,6 +96,10 @@ plots += $(ttest_revealed)
 plots += $(model_choices_2vars)
 plots += $(model_choices_all)
 plots += $(accuracy_rounds)
+plots += $(polarization_rounds_predicted)
+plots += $(regression_predicted_polariz)
+plots += $(ttest_predicted_polariz)
+plots += $(polarization)
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
@@ -130,6 +138,11 @@ $(regression_revealed) $(regression_assigned) $(ttest_assigned) $(ttest_revealed
 $(model_choices_2vars) $(model_choices_all) $(accuracy_rounds): $(part2) $(part1) $(all) analysis/model_choices.py
 	@echo "Model choice plots"
 	python analysis/model_choices.py
+
+# recipe that describes how to build the polarization plots
+$(polarization_rounds_predicted) $(regression_predicted_polariz) $(ttest_predicted_polariz) $(polarization): $(part2) $(part1) $(all) $(pairs) analysis/polarization.py
+	@echo "Polarization plots"
+	python analysis/polarization.py
 
 
 
