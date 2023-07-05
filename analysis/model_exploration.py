@@ -37,3 +37,5 @@ sns.histplot(data=count_models, x='player.number_variables', hue='number_models'
 plt.title('Number of models that were used at least once by a subject')
 plt.savefig('computed_objects/figures/model_count.png') 
 
+
+
