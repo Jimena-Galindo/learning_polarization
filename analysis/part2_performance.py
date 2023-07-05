@@ -17,7 +17,7 @@ from stargazer.stargazer import Stargazer
 # load the data in long format for each part
 part1 = pd.read_csv('data/clean/part1.csv')
 all_rounds = pd.read_csv('data/clean/all.csv')
-part2 = pd.read_csv('data/clean/part2.csv')
+part2 = pd.read_csv('data/clean/part2.csv', dtype={'model': str})
 
 # count the number of guesses they got right in the first 20 rounds of part 2
 guesses2040 = part2[(part2['subsession.round_number']<=20)].groupby('participant.code').sum()['player.correct']
@@ -121,6 +121,14 @@ sns.histplot(data=part2[(part2['player.number_variables']==2) ], x='model', stat
               discrete=True, ax=axs[1], hue='better_random_2040', multiple='stack')
 
 axs[1].set_title('model choices')
+
+
+# load the accuracy of each model
+model_accuracy = pd.read_csv('computed_objects/tables/model_accuracy.csv', dtype={'index':str})
+model_accuracy = model_accuracy[['index', 'accuracy']]
+model_accuracy.rename(columns={'index':'model'}, inplace=True)
+# assign to the data
+part2 = part2.merge(model_accuracy, on='model', how='outer')
 
 sns.lineplot(data=part2[(part2['player.number_variables']==2) ], x='model', y='accuracy', ax=axs[0], 
               color='black')

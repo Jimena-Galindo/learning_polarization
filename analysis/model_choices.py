@@ -14,7 +14,7 @@ from stargazer.stargazer import Stargazer
 # load the data in long format for each part
 part1 = pd.read_csv('data/clean/part1.csv')
 all_rounds = pd.read_csv('data/clean/all.csv')
-part2 = pd.read_csv('data/clean/part2.csv')
+part2 = pd.read_csv('data/clean/part2.csv', dtype={'model': str})
 
 # plot the histogram of model choices and the share of correct guesses
 fig, axs = plt.subplots(2, 1, figsize=(25, 15))
@@ -26,6 +26,14 @@ axs[0].axhline(.5, 0, 1, color = 'grey')
 
 sns.histplot(data=part2, x='model', stat='probability',
               discrete=True, ax=axs[1], palette='Blues_r')
+
+
+# load the accuracy of each model
+model_accuracy = pd.read_csv('computed_objects/tables/model_accuracy.csv', dtype={'index':str})
+model_accuracy = model_accuracy[['index', 'accuracy']]
+model_accuracy.rename(columns={'index':'model'}, inplace=True)
+# assign to the data
+part2 = part2.merge(model_accuracy, on='model', how='outer')
 
 
 sns.lineplot(data=part2, x='model', y='accuracy', ax=axs[0], 

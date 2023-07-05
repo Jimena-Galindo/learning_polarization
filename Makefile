@@ -25,6 +25,10 @@ $(part1) $(part2) $(all) $(pairs): data/raw/Part1_2023-06-05.csv data/raw/Part2_
 clean_data: $(clean_data)
 	@echo "Data is now clean!"
 
+clean_data_clean:
+	rm -f $(clean_data)
+	make clean_data
+
 
 ###############################################
 # computing objects
@@ -60,7 +64,8 @@ accuracy_rounds                = computed_objects/figures/accuracy_rounds.png
 polarization_rounds_predicted  = computed_objects/figures/polarization_rounds_predicted.png
 regression_predicted_polariz   = computed_objects/tables/regression_predicted_polariz.txt
 ttest_predicted_polariz 	   = computed_objects/tables/ttest_predicted_polariz.txt
-polarization 				   = computed_objects/tables/polarization.txt
+polarization 				   = computed_objects/figures/polarization.png
+predicted_polarization_ttest   = computed_objects/tables/predicted_polarization_ttest.txt
 
 
 # recipe that describes how to build the model_accuracy
@@ -100,6 +105,7 @@ plots += $(polarization_rounds_predicted)
 plots += $(regression_predicted_polariz)
 plots += $(ttest_predicted_polariz)
 plots += $(polarization)
+plots += $(predicted_polarization_ttest)
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
@@ -140,7 +146,7 @@ $(model_choices_2vars) $(model_choices_all) $(accuracy_rounds): $(part2) $(part1
 	python analysis/model_choices.py
 
 # recipe that describes how to build the polarization plots
-$(polarization_rounds_predicted) $(regression_predicted_polariz) $(ttest_predicted_polariz) $(polarization): $(part2) $(part1) $(all) $(pairs) analysis/polarization.py
+$(polarization_rounds_predicted) $(regression_predicted_polariz) $(ttest_predicted_polariz) $(polarization) $(predicted_polarization_ttest): $(part2) $(part1) $(all) $(pairs) analysis/polarization.py
 	@echo "Polarization plots"
 	python analysis/polarization.py
 
@@ -149,3 +155,7 @@ $(polarization_rounds_predicted) $(regression_predicted_polariz) $(ttest_predict
 # This recipe concludes when plots are built
 plots: $(plots)
 	@echo "Plots are now built!"
+
+plots_clean:
+	rm -f $(plots)
+	make plots
