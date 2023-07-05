@@ -43,6 +43,8 @@ revealed_available = computed_objects/figures/revealed_available.png
 model_accuracy = computed_objects/tables/model_accuracy.csv
 performance_part1 = computed_objects/tables/performance_part1.csv
 p1_performance_throughout = computed_objects/tables/p1_performance_throughout.csv
+p1_performace_effect_assigned = computed_objects/figures/p1_performace_effect_assigned.png
+p1_performace_effect_revealed = computed_objects/figures/p1_performace_effect_revealed.png
 
 
 # recipe that describes how to build the model_accuracy
@@ -64,6 +66,8 @@ plots += $(assigned_variables_time)
 plots += $(revealed_available)
 plots += $(p1_performance_throughout)
 plots += $(performance_part1)
+plots += $(p1_performace_effect_assigned)
+plots += $(p1_performace_effect_revealed)
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
@@ -82,7 +86,7 @@ $(revealed_variables_pooled) $(assigned_variables) $(assigned_variables_time) $(
 	python analysis/effects_aggregate.py
 
 #recipe that describes hot yo build the part1 perfomance plots
-$(p1_performance_throughout) $(performance_part1): $(part1) analysis/part1_performance.py
+$(p1_performance_throughout) $(performance_part1) $(p1_performace_effect_assigned) $(p1_performace_effect_revealed): $(part1) analysis/part1_performance.py
 	@echo "Part1 performance plots"
 	python analysis/part1_performance.py
 

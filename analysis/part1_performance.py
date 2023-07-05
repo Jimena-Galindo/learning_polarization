@@ -46,3 +46,22 @@ plt.title('Learning by performance in part 1')
 plt.xlabel('round number')
 plt.ylabel('share correct')
 plt.savefig('computed_objects/figures/p1_performance_throughout.png')
+
+# Accuracy wrt number of variables that they were allowed to choose and by part1 performance
+fig, axs = plt.subplots( figsize=(15, 5))
+sns.pointplot(data=all_rounds[(all_rounds['round_number_modif']>20)], x='player.number_variables', y='player.correct', 
+              hue='better_random', eestimator='mean', join=False )
+axs.set_ylim(.35, .75)
+axs.set_title('performance by number of available variables after 20 rounds')
+axs.axhline(.5, 0, 1, color = 'grey')
+
+fig.savefig('computed_objects/figures/p1_performace_effect_assigned.png')
+
+# Accuracy wrt number of variables that they were allowed to choose
+fig, axs = plt.subplots( figsize=(15, 5))
+sns.pointplot(data=all_rounds[(all_rounds['round_number_modif']>20)], x='revealed_variables_count', y='player.correct', 
+              hue='better_random', eestimator='mean', join=False )
+axs.set_ylim(.35, .75)
+axs.set_title('performance by number of variables revealed')
+axs.axhline(.5, 0, 1, color = 'grey')
+fig.savefig('computed_objects/figures/p1_performace_effect_revealed.png')
