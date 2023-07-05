@@ -90,3 +90,23 @@ axs[1].axhline(.5, 0, 1, color = 'grey')
 fig.savefig('computed_objects/figures/p2_performance_by_model.png')
 
 
+# aggregate with treatment assignment only (no random effects) for the better than random group
+y=part2.loc[part2['better_random_2040']==1,'player.correct']
+part2['round'] = part2['subsession.round_number']
+
+mod = smf.ols(formula='y ~ indic_1 + indic_2+ indic_3 + indic_4 + indic_5  - 1', data=part2[part2['better_random_2040']==1])
+
+res_assigned = mod.fit(cov_type='HC3')
+
+print(res_assigned.summary())
+
+stargazer = Stargazer([res_assigned], )
+
+stargazer.render_latex()
+
+# For the regression using assignment to treatment directly for the better than random group
+# test that 1 variable makes the guesses better than random, and whether adding an extra variable is helpful or not  
+hypotheses = 'indic_1-.5 = 0, indic_2 - indic_1 = 0, indic_3 - indic_2 = 0, indic_4 - indic_3 = 0, indic_5 - indic_4 = 0'
+t_test = res_assigned.t_test(hypotheses)
+print(t_test)
+

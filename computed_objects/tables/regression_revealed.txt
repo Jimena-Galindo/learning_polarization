@@ -1,0 +1,31 @@
+\begin{table}[!htbp] \centering
+\begin{tabular}{@{\extracolsep{5pt}}lc}
+\\[-1.8ex]\hline
+\hline \\[-1.8ex]
+& \multicolumn{1}{c}{\textit{Dependent variable:}} \
+\cr \cline{1-2}
+\\[-1.8ex] & (1) \\
+\hline \\[-1.8ex]
+ C(revealed_variables_count)[0] & 0.489$^{***}$ \\
+  & (0.075) \\
+ C(revealed_variables_count)[1] & 0.535$^{***}$ \\
+  & (0.023) \\
+ C(revealed_variables_count)[2] & 0.598$^{***}$ \\
+  & (0.027) \\
+ C(revealed_variables_count)[3] & 0.600$^{***}$ \\
+  & (0.029) \\
+ C(revealed_variables_count)[4] & 0.611$^{***}$ \\
+  & (0.028) \\
+ C(revealed_variables_count)[5] & 0.590$^{***}$ \\
+  & (0.030) \\
+\hline \\[-1.8ex]
+ Observations & 1,740 \\
+ $R^2$ & 0.005 \\
+ Adjusted $R^2$ & 0.002 \\
+ Residual Std. Error & 0.493(df = 1734)  \\
+ F Statistic & nan$^{***}$ (df = 5.0; 1734.0) \\
+\hline
+\hline \\[-1.8ex]
+\textit{Note:} & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\
+\end{tabular}
+\end{table}

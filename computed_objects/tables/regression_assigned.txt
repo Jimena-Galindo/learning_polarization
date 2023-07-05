@@ -1,0 +1,29 @@
+\begin{table}[!htbp] \centering
+\begin{tabular}{@{\extracolsep{5pt}}lc}
+\\[-1.8ex]\hline
+\hline \\[-1.8ex]
+& \multicolumn{1}{c}{\textit{Dependent variable:}} \
+\cr \cline{1-2}
+\\[-1.8ex] & (1) \\
+\hline \\[-1.8ex]
+ indic_1 & 0.534$^{***}$ \\
+  & (0.027) \\
+ indic_2 & 0.602$^{***}$ \\
+  & (0.026) \\
+ indic_3 & 0.584$^{***}$ \\
+  & (0.027) \\
+ indic_4 & 0.599$^{***}$ \\
+  & (0.025) \\
+ indic_5 & 0.576$^{***}$ \\
+  & (0.027) \\
+\hline \\[-1.8ex]
+ Observations & 1,740 \\
+ $R^2$ & 0.002 \\
+ Adjusted $R^2$ & 0.000 \\
+ Residual Std. Error & 0.494(df = 1735)  \\
+ F Statistic & nan$^{***}$ (df = 4.0; 1735.0) \\
+\hline
+\hline \\[-1.8ex]
+\textit{Note:} & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\
+\end{tabular}
+\end{table}

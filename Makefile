@@ -49,6 +49,10 @@ p2_correct_rounds              = computed_objects/figures/p2_correct_rounds.png
 p2_performance_effect_revealed = computed_objects/figures/p2_performance_effect_revealed.png
 p2_performance_effect_assigned = computed_objects/figures/p2_performance_effect_assigned.png
 p2_performance_by_model        = computed_objects/figures/p2_performance_by_model.png
+regression_revealed            = computed_objects/tables/regression_revealed.txt
+regression_assigned            = computed_objects/tables/regression_assigned.txt
+ttest_assigned                 = computed_objects/tables/ttest_assigned.txt
+ttest_revealed                 = computed_objects/tables/ttest_revealed.txt
 
 # recipe that describes how to build the model_accuracy
 $(model_accuracy): data/scripts/simulation_accuracy.py
@@ -75,6 +79,11 @@ plots += $(p2_correct_rounds)
 plots += $(p2_performance_effect_revealed)
 plots += $(p2_performance_effect_assigned)
 plots += $(p2_performance_by_model)
+plots += $(regression_revealed)
+plots += $(regression_assigned)
+plots += $(ttest_assigned)
+plots += $(ttest_revealed)
+
 
 # recipe that describes how to build the learning plots from the clean data
 $(learning_part1) $(learning_all): $(part1) $(all) analysis/learning_plots.py
@@ -101,6 +110,15 @@ $(p1_performance_throughout) $(performance_part1) $(p1_performace_effect_assigne
 $(p2_correct_rounds) $(p2_performance_effect_revealed) $(p2_performance_effect_assigned) $(p2_performance_by_model): $(part2) $(part1) $(all) analysis/part2_performance.py
 	@echo "Part2 performance plots"
 	python analysis/part2_performance.py
+
+
+#recipe that describes how to build the regression tables
+$(regression_revealed) $(regression_assigned) $(ttest_assigned) $(ttest_revealed): $(part2) $(part1) $(all) analysis/regressions.py
+	@echo "Regression tables"
+	python analysis/regressions.py
+
+
+
 
 # This recipe concludes when plots are built
 plots: $(plots)
