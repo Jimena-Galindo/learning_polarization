@@ -134,8 +134,6 @@ mod = smf.ols(formula='y ~ predicted_polarization+round_number_modif+round_numbe
 
 res_predicted = mod.fit(cov_type='HC3')
 
-print(res_predicted.summary())
-
 stargazer = Stargazer([res_predicted], )
 
 with open('computed_objects/tables/regression_predicted_polariz.txt', 'w') as f:
@@ -143,7 +141,6 @@ with open('computed_objects/tables/regression_predicted_polariz.txt', 'w') as f:
 
 hypotheses = 'round_number_modif-round_number_modif:predicted_polarization=0'
 t_test = res_predicted.t_test(hypotheses)
-print(t_test.summary())
 
 with open('computed_objects/tables/ttest_predicted_polariz.txt', 'w') as f:
     f.write(str(t_test.summary()))
@@ -180,7 +177,6 @@ mod = smf.ols(formula='y ~1+ C(predicted_polarization)', data=pairs)
 
 res_polariz = mod.fit(cov_type='HC3')
 
-print(res_polariz.summary())
 
 stargazer = Stargazer([res_polariz], )
 

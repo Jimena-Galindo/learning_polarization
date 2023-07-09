@@ -45,13 +45,13 @@ assigned_variables             = computed_objects/figures/assigned_variables.png
 assigned_variables_time        = computed_objects/figures/assigned_variables_time.png
 revealed_available             = computed_objects/figures/revealed_available.png
 model_accuracy                 = computed_objects/tables/model_accuracy.csv
-performance_part1              = computed_objects/figrues/performance_part1.png
+performance_part1              = computed_objects/figures/performance_part1.png
 p1_performance_throughout      = computed_objects/figures/p1_performance_throughout.png
 p1_performace_effect_assigned  = computed_objects/figures/p1_performace_effect_assigned.png
 p1_performace_effect_revealed  = computed_objects/figures/p1_performace_effect_revealed.png
 p2_correct_rounds              = computed_objects/figures/p2_correct_rounds.png
 p2_performance_effect_revealed = computed_objects/figures/p2_performance_effect_revealed.png
-p2_performance_effect_assigned = computed_objects/figures/p2_performance_effect_assigned.png
+p2_performance_effect_assigned = computed_objects/figures/p2_performance_effect_allowed.png
 p2_performance_by_model        = computed_objects/figures/p2_performance_by_model.png
 p2_performance_model_choices_2var = computed_objects/figures/p2_performance_model_choices_2var.png
 regression_revealed            = computed_objects/tables/regression_revealed.txt
@@ -66,7 +66,7 @@ regression_predicted_polariz   = computed_objects/tables/regression_predicted_po
 ttest_predicted_polariz 	   = computed_objects/tables/ttest_predicted_polariz.txt
 polarization 				   = computed_objects/figures/polarization.png
 predicted_polarization_ttest   = computed_objects/tables/predicted_polarization_ttest.txt
-model_count                    = computed_objects/tables/model_count.png
+model_count                    = computed_objects/figures/model_count.png
 
 # recipe that describes how to build the model_accuracy
 $(model_accuracy): data/scripts/simulation_accuracy.py

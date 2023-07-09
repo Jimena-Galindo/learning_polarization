@@ -26,8 +26,6 @@ mod = smf.ols(formula='y ~ indic_1 + indic_2+ indic_3 + indic_4 + indic_5  - 1',
 
 res_assigned = mod.fit(cov_type='HC3')
 
-print(res_assigned.summary())
-
 stargazer = Stargazer([res_assigned], )
 
 with open('computed_objects/tables/regression_assigned.txt', 'w') as f:
@@ -39,7 +37,7 @@ with open('computed_objects/tables/regression_assigned.txt', 'w') as f:
 # test that 1 variable makes the guesses better than random, and whether adding an extra variable is helpful or not  
 hypotheses = 'indic_1-.5 = 0, indic_2 - indic_1 = 0, indic_3 - indic_2 = 0, indic_4 - indic_3 = 0, indic_5 - indic_4 = 0'
 t_test_assigned = res_assigned.t_test(hypotheses)
-print(t_test_assigned)
+
 with open('computed_objects/tables/ttest_assigned.txt', 'w') as f:
     f.write(str(t_test_assigned.summary()))
 
@@ -51,7 +49,6 @@ mod = smf.ols(formula='y ~ C(revealed_variables_count)-1', data=part2)
 
 res_revealed = mod.fit(cov_type='HC3')
 
-print(res_revealed.summary())
 
 stargazer = Stargazer([res_revealed], )
 
@@ -61,7 +58,7 @@ with open('computed_objects/tables/regression_revealed.txt', 'w') as f:
 
 hypotheses = 'C(revealed_variables_count)[0] - .5 = 0, C(revealed_variables_count)[1] - C(revealed_variables_count)[0] = 0, C(revealed_variables_count)[2] - C(revealed_variables_count)[1] = 0, C(revealed_variables_count)[3] - C(revealed_variables_count)[2] = 0, C(revealed_variables_count)[4] - C(revealed_variables_count)[3] = 0, C(revealed_variables_count)[5] - C(revealed_variables_count)[4] = 0'
 t_test_revealed = res_revealed.t_test(hypotheses)
-print(t_test_revealed)
+
 
 with open('computed_objects/tables/ttest_revealed.txt', 'w') as f:
     f.write(str(t_test_revealed.summary()))

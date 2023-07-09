@@ -22,7 +22,7 @@ plt.title('Performance by number of revealed variables')
 plt.axhline(.5, 0, 1, color = 'grey')
 axs.set_xlabel('number of revealed variables')
 axs.set_ylabel('share of correct guesses')
-fig.show()
+
 
 fig.savefig('computed_objects/figures/revealed_variables_pooled.png')
 
@@ -34,8 +34,6 @@ plt.title('Performance by number of available variables')
 plt.axhline(.5, 0, 1, color = 'grey')
 axs.set_xlabel('number of available variables')
 axs.set_ylabel('share of correct guesses')
-
-fig.show()
 
 fig.savefig('computed_objects/figures/assigned_variables.png')
 

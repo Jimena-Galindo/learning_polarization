@@ -65,12 +65,6 @@ N = len(all_rounds['participant.code'].unique())
 
 share_better_random = better_random_count/N
 
-print('the number of subjects who do better than random in rounds 20 - 40 is ' + str(better_random_count))
-
-print('the number of subjects who do random or worse in rounds 20 - 40  is ' + str(N - better_random_count))
-
-print('the share of subjects who do better than random in rounds 20 - 40 is ' + str(share_better_random))
-
 
 # Accuracy wrt choosen model conditional on the number of variables they were allowed to choose by group in part 2 for 
 # one variable models and two variable models
@@ -98,8 +92,6 @@ mod = smf.ols(formula='y ~ indic_1 + indic_2+ indic_3 + indic_4 + indic_5  - 1',
 
 res_assigned = mod.fit(cov_type='HC3')
 
-print(res_assigned.summary())
-
 stargazer = Stargazer([res_assigned], )
 
 stargazer.render_latex()
@@ -108,7 +100,6 @@ stargazer.render_latex()
 # test that 1 variable makes the guesses better than random, and whether adding an extra variable is helpful or not  
 hypotheses = 'indic_1-.5 = 0, indic_2 - indic_1 = 0, indic_3 - indic_2 = 0, indic_4 - indic_3 = 0, indic_5 - indic_4 = 0'
 t_test = res_assigned.t_test(hypotheses)
-print(t_test)
 
 fig, axs = plt.subplots(2, 1, figsize=(25, 15))
 sns.pointplot(data=part2[(part2['player.number_variables']==2) ], x='model', y='player.correct',
@@ -133,4 +124,4 @@ part2 = part2.merge(model_accuracy, on='model', how='outer')
 sns.lineplot(data=part2[(part2['player.number_variables']==2) ], x='model', y='accuracy', ax=axs[0], 
               color='black')
 
-fig.savefig('computed_objects/figures/p2_perfotmance_model_choices_2var.png')
+fig.savefig('computed_objects/figures/p2_performance_model_choices_2var.png')

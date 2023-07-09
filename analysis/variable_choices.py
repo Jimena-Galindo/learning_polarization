@@ -72,6 +72,4 @@ axs[2].set_ylim(0. ,.8)
 axs[2].set_xlabel('variable')
 axs[2].set_xticks([0, 1, 2, 3, 4], ['x1', 'x2', 'x3', 'x4', 'x5'])
 
-fig.show()
-
 plt.savefig('computed_objects/figures/variable_choices_time.png')

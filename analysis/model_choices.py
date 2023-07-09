@@ -74,4 +74,4 @@ plt.axhline(1, 0, 1, color = 'grey', linestyle='--', alpha = .5)
 plt.axhline(.85, 0, 1, color = 'grey', linestyle='--', alpha = .5)
 
 
-plt.savefig('computed_objects/figures/acuracy_rounds.png')
+plt.savefig('computed_objects/figures/accuracy_rounds.png')

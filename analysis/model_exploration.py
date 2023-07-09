@@ -28,8 +28,7 @@ count_models.reset_index(inplace=True)
 
 counted_models = count_models.groupby(['player.number_variables', 'model']).count()
 counted_models.reset_index(inplace=True)
-print('the average number of models used by number of available variables is:')
-print(counted_models.groupby('player.number_variables')['model'].mean())
+
 
 count_models.rename(columns={'model':'number_models'}, inplace=True)
 # plot the histogram of the number of models used by number of available variables
