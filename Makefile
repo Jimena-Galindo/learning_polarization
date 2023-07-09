@@ -165,3 +165,16 @@ plots: $(plots)
 plots_clean:
 	rm -f $(plots)
 	make plots
+
+###############################################
+# Writeup
+###############################################
+
+paper: paper/paper.Rmd paper/compile_paper.R $(plots)
+	@echo "Compile the paper"
+	@Rscript paper/compile_paper.R
+
+paper_clean: paper/paper.Rmd paper/compile_paper.R
+	rm -f paper/paper.pdf
+	make plots_clean
+	make paper
