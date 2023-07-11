@@ -48,9 +48,9 @@ TBW
 
 A finite number of observable random variables, $X =(x_1, x_2, ..., x_N)$, determine a binary state, $y$. 
 The observable variables are independently distributed and each follows a Normal distribution with corresponding mean 
-$\mu_i$ and standard deviation $\sigma_i$ with $i \in \{1, 2, ..., N\}$. 
+$\mu_i$ and standard deviation $\sigma_i$. The state is \emph{Red} (**R**) or \emph{Blue} (**B**) and is determined in 
+the following way:
 
-The state is \emph{Red} (**R**) or \emph{Blue} (**B**) and is determined in the following way:
 \begin{equation*}
 y = \begin{cases}
 \text{\textbf{B}} &\text{if $a_1x_1+...+a_Nx_N + K\geq0$}\\
@@ -59,106 +59,116 @@ y = \begin{cases}
 \end{equation*}
 
 An observable variable $x_i$ is *relevant* if the associated coefficient, $a_i$, is non-zero. 
-Likewise, variable $i$ is *irrelevant* if $a_i = 0$. 
-We call the set of relevant variables $\mathcal{R}$ and the set of irrelevant variables $\mathcal{I}$.
+Likewise, variable $i$ is *irrelevant* if $a_i = 0$. We call the set of relevant variables $\mathcal{R}$ and the set of 
+irrelevant variables $\mathcal{I}$.
 
-In each period, the decision-maker (DM) observes the realization of all observable variables and predicts the state. 
-Their flow payoff in period $t$ is 1 if they predict the state correctly, and it is zero otherwise. 
-Denote the prediction by $\hat{y}$. 
+In each period, an agent observes the realization of all observable variables and predicts the state. Their flow payoff in 
+period $t$ is 1 if they predict the state correctly, and it is zero otherwise. Denote the prediction by $\hat{y}$. 
 
-In order to make a prediction, the DM uses a map $f: M_t\to \{\textbf{B}, \textbf{R}\}$  
-where $M_t \subseteq \{x_1, x_2, ..., x_N\}$ is the set of variables that they choose to consider in period $t$. 
-Our main object of study is the set of variables that the DM decides to consider and not the properties of the 
-mapping from the variables to the state. We refer to the set of variables that are taken into consideration, $M_t$, 
-as the DM's *model of the world*, and we abstract away from how the variables are mapped into a prediction of 
-the state.  
+In order to make a prediction, the agent uses a map $M_t\to \{\textbf{B}, \textbf{R}\}$  where 
+$M_t \subseteq \{x_1, x_2, ..., x_N\}$ is the set of variables that they choose to consider in period $t$. 
+Our main object of study is the set of variables that the agent decides to consider in a given period, and the procedure by 
+which the maping or the set are updated. We refer to the set of variables that are taken into consideration, $M_t$, as the agent's 
+*mental model*, and assume that the mapping is linear.  
 
-A model of the world is said to be *simple* if it does not include all the relevant variables, 
-*i.e.* if $M\subset \mathcal{R}$. And it is complex if it includes all relevant variables, $M=\mathcal{R}$. Thus, whenever 
-agents are using simple models, they are ignoring some of the relevant variables even if the information is available to them.
-In contrast, whenever agents are using complex models, they are using all the relevant information that is available to them, 
-so restricting the number of variables that is available to them will impair their ability to predict correctly. In the design
-of the experiment we will exploit these differences in order to determine whether subjects are using simple or complex models.
+A mental model is *simple* if it does not include all the relevant variables, 
+*i.e.* if $M\subset \mathcal{R}$. And it is *complex* if it includes all relevant variables, $M=\mathcal{R}$. In 
+addition, mental models can be ranked in terms of their simplicity by the number of relevant variables that they consider. 
 
-**Prediction 1:** If subjects are using simple model with $K$ variables, then allowing them to disclose $K+1$ variables 
-will not increase the frequency with which they make correct predictions.
+Whenever agents use simple models, they ignore some of the relevant information that is available to them.
+In contrast, whenever agents use complex models, they use all the relevant information available. This means that when agents 
+with complex mental models are restricted in terms of how many variables they can consider, their ability
+to predict the state will be impaired. On the contrary, restricting the number of variables that an agent with a simple model can 
+use, does not necessarily affect their ability to predict the state. In particular, if they are considering fewer variables than 
+what the restriciton allows, their predictions should be as accurate as without the restriciton. These two effects are captured in 
+predictions 1 and 1B respectively.
 
-**Prediction 1B:** If subjects are using complex models, then allowing them to disclose an additional variable will always 
+**Prediction 1:** If subjects use complex models, then allowing them to use an additional variable will always 
 increase the frequency with which they make correct predictions.
 
-### Optimal Rules
-The most accurate prediction rule for this setting will be one that predicts the state to be **B** whenever, 
-given the observables, **B** is more likely. And it predicts **R** whenever **R** is more likely 
-given the observables. Because we abstract away from the procedure through which the rule is updated, 
-we will make predictions under the assumption that the DM has learned the parameters perfectly. That is, 
-they have seen enough information that, under an updating procedure that converges to the truth---for example, 
-correctly specified regression model or Bayes rule---they would have converged to the true parameters already.  
+**Prediction 1B:** If subjects use a simple mental model that considers $K$ variables, allowing them to use $K+1$ variables 
+will not increase the frequency with which they make correct predictions.
 
-We refer to a prediction rule as an *Optimal Rule* if it is the rule that a fully rational Decision maker would 
+### Optimal Rules
+Conditional of using a particular mental model, the most accurate prediction rule that the agent can use is one that 
+predicts the state to be **B** whenever, given the observables under consideration, **B** is more likely. 
+And it predicts **R** whenever **R** is more likely. Because we abstract away from the procedure through which the rule is updated, 
+we will make predictions under the assumption that the agent has learned the parameters perfectly. That is, 
+they have seen enough information that, under an updating procedure that converges to the truth---for example, 
+correctly specified regression model or Bayes rule---they would have converged to the true parameters already. This provides an 
+upper bound for how well any model can perform. 
+
+We refer to a prediction rule as an *Optimal Rule* if it is the rule that a fully rational agent would 
 converge to with perfect Bayesian learning. In this context, Bayesian learning corresponds to using Bayes rule to 
 learn the coefficients $a = (a_1, a_2, ..., a_N)$ as well as the constant $K$. This means that in an $N$ dimensional 
-space, the Decision Maker must learn $N+1$ parameters which corresponds to learning the halfspace in which the state 
+space, the agent must learn $N+1$ parameters which corresponds to learning the halfspace in which the state 
 is **B**. The optimal rule for the complex model coincides with the true data-generating process when learning 
-is perfect.
+is perfect and the parameters are identified.
 
-Conditional on using a simple model, the optimal rule for that model is the rule that, when restricted to the 
-variables being considered, does the best at predicting the state. In this case, the Decision Maker is learning only 
-the parameters that pertain the variables in the model. Hence, for a model that considers $K$ variables, the DM will 
-have to learn $K+1$ parameters. The following proposition illustrates exactly what the optimal prediction rules look 
-like when the DM is able to learn. 
+An optimal rule conditional on model $M$ is the rule that, when restricted to the 
+variables being considered, does the best at predicting the state. In this case, the agent is learning only 
+the parameters that pertain the variables in $M$ plus a constant term. The following proposition illustrates exactly 
+what the optimal prediction rules look like when the agent is able to learn perfectly. 
 
 ##### Proposition.
-_Fix any model that considers $k\leq N$ variables and relabel the variable so that $x_1, ..., x_K$ are the variables 
-that the model considers and $x_{k+1}, ..., x_N$ are the ones that the model does not consider. Relabel the 
+_Fix any model that considers $m\leq N$ variables and relabel the variable so that $x_1, ..., x_m$ are the variables 
+that the model considers and $x_{m+1}, ..., x_N$ are the ones that the model does not consider. Relabel the 
 coefficients $a = (a_1, ..., a_N)$ accordingly as well._
 
 ##### proof.
-_Let $M:=a_1x_1+...+a_kx_k$ and $M^c = a_{k+1}x_{k+1}+...+a_Nx_N+k$ and define the latent variable $y^L := M +  M^c$. 
-The optimal prediction rule for a model that considers the variables in $M$ the state to be $\textbf{B}$ whenever 
+_Let $M:=a_1x_1+...+a_mx_m$ and $M^c = a_{m+1}x_{m+1}+...+a_Nx_N+k$ and define the latent variable $y^L := M +  M^c$. 
+The optimal prediction rule for model $M$ predicts the state to be $\textbf{B}$ whenever 
 $P[y^L|M]\geq \frac{1}{2}$ and predicts $\textbf{R}$ otherwise._
 
 _Using the fact that for a random variable $z\sim N(\mu_z, \sigma_z)$ we have that $P[z\geq \mu_z]=\frac{1}{2}$ and 
 noticing that $M^c$ and $y^L|M$ are Normally distributed with means $\mathbb{E}[M^c]$ and $M+\mathbb{E}[M^c]$ 
-respectively, it is easy to see that  $P[y^L\geq 0 | M] \geq P[y^L\geq M+\mathbb{E}[M^c | M]]=\frac{1}{2}$ whenever 
+respectively, it is easy to see that $P[y^L\geq 0 | M] \geq P[y^L\geq M+\mathbb{E}[M^c | M]]=\frac{1}{2}$ whenever 
 $M+\mathbb{E}[M^c]\geq 0$. Similarly, whenever $M+\mathbb{E}[M^c]< 0$ we will have that 
 $P[y^L\geq 0 | M] < P[y^L\geq M+\mathbb{E}[M^c | M]]=\frac{1}{2}$. Therefore, the optimal rule is to predict 
 $\mathbf{B}$ whenever $a_1x_1+...+a_kx_k\geq -\mathbb{E}[M^c]$ and $\textbf{R}$ otherwise._
 
-With limited data, it is not guaranteed that the DM is able to perfectly learn the parameters required for the optimal rule. 
-However, the notion of optimal rules is useful for determining the scenarios in which we can expect polarization to arise. 
+With limited data, it is not guaranteed that the agent is able to perfectly learn the parameters required for the optimal rule. 
+However, the notion of optimal rules is useful for determining a benchmark for how well each model can perform, as well as 
+the scenarios in which we can expect polarization to arise. 
 The next section uses the notion of optimal rules to formalize the concept of polarization and to establish the 
 main prediction of the theory. 
 
 ### Polarization
-To study polarization, we take the definition of @Haghtalab2021: two DMs are said to be 
+We take the definition of polarization from @Haghtalab2021: two agents are said to be 
 polarized if, when observing the same realization of observables, they predict the state to be different. That is, 
-they both observe the same draw of $x=(x_1, ..., x_N)$ but one DM predicts the state to be **B** and the other 
+they both observe the same draw of $x=(x_1, ..., x_N)$ but one agent predicts the state to be **B** and the other 
 predicts the state to be **R**.
 
-Within out framework---as in @Haghtalab2021---polarization may persist even when DMs have 
-access to infinite data because they might be using different models of the world in order to make their predictions. 
-Nevertheless using different models does not necessarily imply that beliefs will always be polarized; it must also be 
-the case that the realization of observables falls in a *disagreement zone*. By disagreement zone, we simply 
-mean that if the two models that are being used for prediction are $M_1$ and $M_2$, the realization of the 
-observables $x=(x_1, ..., x_N)$ must be such that $M_1$ makes a different prediction from $M_2$. The following 
+Within out framework---as in @Haghtalab2021---polarization may persist even when agents have 
+access to infinite data because they might be using different models of the world. 
+Nevertheless using different models does not necessarily imply that beliefs will always be polarized, it must also be 
+the case that the realization of observables falls in a polarization zone. By *polarization zone*, we  
+mean that if the two models being used for prediction are $M_1$ and $M_2$, the realization of the 
+observables $x=(x_1, ..., x_N)$ must be such that the optimal rule for $M_1$ makes a different prediction from 
+that of $M_2$. The following 
 2-dimensional example illustrates why the use of different models is necessary but not sufficient for polarization 
 to arise.
 
 ##### Example
-_The optimal rule for the complex model coincides with the truth, it predicts **B** if $x_2+1\geq x_1$. 
+_The optimal rule for the complex model coincides with the truth, it predicts **B** if $x_2-1\geq x_1$. 
 In addition, there are two simple models: one that considers only $x_1$---call it $M_1$---and one that considers 
 only $x_2$---call it $M_2$. The optimal rules for $M_1$ and $M_2$ are threshold rules that predict the state is **B** 
 if the value of $x_i$ is below (above) the threshold $t_i := \mu_{-i} + k$ and the predicted state is **R** otherwise.
-These prediction rules are illustrated in . As the figure makes clear, both rules agree on the predicted state for 
-some values of $(x_1, x_2)$ and disagree for other values. Theregions in which the rules make different predictions
+These prediction rules are illustrated in . As Figure \ref{example} makes clear, both rules agree on the predicted state for 
+some values of $(x_1, x_2)$ and disagree for other values. The regions in which the rules make different predictions
 are the disagreement zones._
 
-For any pair of agents who observe the same realization of teh observables and use different models, it is possible
-to determine whether they will be polarized or not by looking at the predictions made by their models. Notice that the 
+```{r example, out.width='50%', fig.align='center', fig.cap='\\label{example} Polarization regions for two single variable models'}
+knitr::include_graphics(here("diagram_polariazation_2variables.png"))
+```
+
+For any pair of agents who observe the same realization of the observables and use different models, it is possible
+to determine whether they will be polarized or not by looking at the predictions made by the optimal rule corresponding to their 
+models. Notice that the 
 polarizing observations---those that fall into a polarization zone---are different for each pair of models. Also notice that 
-our definition of the polarization zone assumes that the DMs are using optimal rules. This is a very strong assumption 
-and will most likely not be the case that subjects in the experiment learn perfectly. However, the notion of optimal rules
-allows us to have a clean definition of polarization and to make predictions about when polarization will arise.
+our definition of the polarization zone assumes that the agents are using optimal rules. This is a very strong assumption 
+and will most likely not be the case that subjects in the experiment learn perfectly. This is a theoretical construct that allows
+us to formalize Prediction 2.
 
 **Prediction 2 :** Polarization will arise more often when the theory predicts so. That is, when two agents who have 
 different models of the world, are facing a realization of observables that falls into the polarization zone corresponding 
@@ -173,13 +183,12 @@ part2 <- fread(here("data", "clean", "part2.csv"))
 ```
 
 Subjects for the experimet were recruited from the CESS lab subject pool at NYU. 
-We recruited `r data[, uniqueN(participant.code)]` undergraduate students who participated in this experiment in person at 
-the CESS lab. The experiment was coded using o-tree @otree and it consisted of two parts: Part 1 was meant to expose the 
-subjects to the data generating process
+We recruited `r data[, uniqueN(participant.code)]` undergraduate students who participated in this experiment in person 
+durinf the summer and fall of 2023. The experiment was coded using o-tree @otree and it consisted of two parts:
+Part 1 was meant to expose the subjects to the data generating process
 and allow them to learn how to predict; part 2 was meant to elicit the models of the world that subjects might have
 developed in part 1.
 
-Upon arrival subjects were randomly placed in pairs, however, they were not informed of this fact.
 Part 1 consited of 20 rounds in which subjects observed the realizations of all of the observables and were asked to predict
 the state. We had 5 observable variables called variable 1, 2, 3, 4 and 5. The variables were independent and Normally 
 distributed with means and variances as described in TABLE. 
