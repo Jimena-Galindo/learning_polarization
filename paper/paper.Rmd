@@ -6,6 +6,7 @@ abstract: "TBW"
 output: 
     pdf_document:
         citation_package: natbib
+bibliography: bibliography.bib
 fontsize: 12pt
 geometry:
 - margin=2.5cm
@@ -30,7 +31,9 @@ TBW
 
 # Framework and Predictions
 
-A finite number of observable random variables, $X =(x_1, x_2, ..., x_N)$, determine a binary state, $y$. The observable variables are independently distributed and each follows a Normal distribution with corresponding mean $\mu_i$ and standard deviation $\sigma_i$ with $i \in \{1, 2, ..., N\}$. 
+A finite number of observable random variables, $X =(x_1, x_2, ..., x_N)$, determine a binary state, $y$. 
+The observable variables are independently distributed and each follows a Normal distribution with corresponding mean 
+$\mu_i$ and standard deviation $\sigma_i$ with $i \in \{1, 2, ..., N\}$. 
 
 The state is \emph{Red} (**R**) or \emph{Blue} (**B**) and is determined in the following way:
 \begin{equation*}
@@ -56,7 +59,17 @@ as the DM's *model of the world*, and we abstract away from how the variables ar
 the state.  
 
 A model of the world is said to be *simple* if it does not include all the relevant variables, 
-*i.e.* if $M\subset \mathcal{R}$. And it is complex if it includes all relevant variables, $M=\mathcal{R}$. 
+*i.e.* if $M\subset \mathcal{R}$. And it is complex if it includes all relevant variables, $M=\mathcal{R}$. Thus, whenever 
+agents are using simple models, they are ignoring some of the relevant variables even if the information is available to them.
+In contrast, whenever agents are using complex models, they are using all the relevant information that is available to them, 
+so restricting the number of variables that is available to them will impair their ability to predict correctly. In the design
+of the experiment we will exploit these differences in order to determine whether subjects are using simple or complex models.
+
+**Prediction 1:** If subjects are using simple model with $K$ variables, then allowing them to disclose $K+1$ variables 
+will not increase the frequency with which they make correct predictions.
+
+**Prediction 1B:** If subjects are using complex models, then allowing them to disclose an additional variable will always 
+increase the frequency with which they make correct predictions.
 
 ## Optimal Rules
 The most accurate prediction rule for this setting will be one that predicts the state to be **B** whenever, 
@@ -96,19 +109,18 @@ $M+\mathbb{E}[M^c]\geq 0$. Similarly, whenever $M+\mathbb{E}[M^c]< 0$ we will ha
 $P[y^L\geq 0 | M] < P[y^L\geq M+\mathbb{E}[M^c | M]]=\frac{1}{2}$. Therefore, the optimal rule is to predict 
 $\mathbf{B}$ whenever $a_1x_1+...+a_kx_k\geq -\mathbb{E}[M^c]$ and $\textbf{R}$ otherwise._
 
-
 With limited data, it is not guaranteed that the DM is able to perfectly learn the parameters required for the optimal rule. 
 However, the notion of optimal rules is useful for determining the scenarios in which we can expect polarization to arise. 
 The next section uses the notion of optimal rules to formalize the concept of polarization and to establish the 
 main prediction of the theory. 
 
 ## Polarization
-To study polarization, we take the definition of CITATION: two DMs are said to be 
+To study polarization, we take the definition of @Haghtalab2021: two DMs are said to be 
 polarized if, when observing the same realization of observables, they predict the state to be different. That is, 
 they both observe the same draw of $x=(x_1, ..., x_N)$ but one DM predicts the state to be **B** and the other 
 predicts the state to be **R**.
 
-Within out framework---as in CITATION---polarization may persist even when DMs have 
+Within out framework---as in @Haghtalab2021---polarization may persist even when DMs have 
 access to infinite data because they might be using different models of the world in order to make their predictions. 
 Nevertheless using different models does not necessarily imply that beliefs will always be polarized; it must also be 
 the case that the realization of observables falls in a *disagreement zone*. By disagreement zone, we simply 
@@ -127,7 +139,15 @@ some values of $(x_1, x_2)$ and disagree for other values. Theregions in which t
 are the disagreement zones._
 
 For any pair of agents who observe the same realization of teh observables and use different models, it is possible
-to determine whether they will be polarized or not by looking at the predictions made by their models.
+to determine whether they will be polarized or not by looking at the predictions made by their models. Notice that the 
+polarizing observations---those that fall into a polarization zone---are different for each pair of models. Also notice that 
+our definition of the polarization zone assumes that the DMs are using optimal rules. This is a very strong assumption 
+and will most likely not be the case that subjects in the experiment learn perfectly. However, the notion of optimal rules
+allows us to have a clean definition of polarization and to make predictions about when polarization will arise.
+
+**Prediction 2 :** Polarization will arise more often when the theory predicts so. That is, when two agents who have 
+different models of the world, are facing a realization of observables that falls into the polarization zone corresponding 
+to their models.
 
 # Experimental Design
 ```{r read-data-all}
@@ -136,7 +156,7 @@ data <- fread(here("data", "clean", "all.csv"))
 
 Subjects for the experimet were recruited from the CESS lab subject pool at NYU. 
 We recruited `r data[, uniqueN(participant.code)]` undergraduate students who participated in this experiment in person at 
-the CESS lab. The experiment was coded using o-tree CITATION and it consisted of two parts: Part 1 was meant to expose the 
+the CESS lab. The experiment was coded using o-tree @otree and it consisted of two parts: Part 1 was meant to expose the 
 subjects to the data generating process
 and allow them to learn how to predict; part 2 was meant to elicit the models of the world that subjects might have
 developed in part 1.
@@ -153,6 +173,7 @@ variance of the modified normal $a_ix_i$. The constant $k$ was chosen so that th
 The last column of TABLE shows the probability of the optimal prediction rule making a correct prediction when the model used
 considers only each variable by itself. This is the measure that we use to determine the informativeness of each variable and
 is reported in the last column of TABLE.
+
 
 | Variable | Mean | Variance | Modified Variable | Modified Variance | Informativeness |
 | -------- | ---- | -------- | ----------------- | ----------------- | --------------- |
@@ -177,9 +198,7 @@ information for prediciton. If, on the other hand, they do not perform better wh
 that although they are disclosing an additional variable, they do not correctly incorporate the infomation into their prediciton 
 rule. Thus, if we observe that the performance of our subjects does not improve when they are allowed to disclose $K+1$ variables, 
 relative to their performance when they were allowed to disclose only $K$ variables, their model of the world must be of size $K$
-or lower.
-
-
+or lower. This feature design allows us to test prediciton 1 and 1B and determine the number of variables that subjects are using.
 
 # Data
 
@@ -187,12 +206,6 @@ or lower.
 
 # Conclusion
 
-# References
-
 # Appendix
 
-
-
-
-Inline code example: `r data[, uniqueN(participant.code)]`
 
