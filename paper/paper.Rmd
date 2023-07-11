@@ -6,6 +6,20 @@ abstract: "TBW"
 output: 
     pdf_document:
         citation_package: natbib
+        fig_width: 7
+        fig_height: 6
+        fig_caption: true
+        number_sections: false
+        keep_tex: true
+        extra_dependencies:
+            footmisc: ["bottom"] # footnote management
+            setspace: ["doublespacing"] # spacing of the paper
+            caption: ["normal"]
+            dsfont: null # indicator function 1
+            booktabs: null
+            makecell: null
+            hyperref: null
+
 bibliography: bibliography.bib
 fontsize: 12pt
 geometry:
@@ -19,7 +33,8 @@ documentclass: article
 library(data.table)
 library(here)
 renv::snapshot()
-
+library("languageserver")
+library(reticulate)
 ```
 
 # Introduction
@@ -71,7 +86,7 @@ will not increase the frequency with which they make correct predictions.
 **Prediction 1B:** If subjects are using complex models, then allowing them to disclose an additional variable will always 
 increase the frequency with which they make correct predictions.
 
-## Optimal Rules
+### Optimal Rules
 The most accurate prediction rule for this setting will be one that predicts the state to be **B** whenever, 
 given the observables, **B** is more likely. And it predicts **R** whenever **R** is more likely 
 given the observables. Because we abstract away from the procedure through which the rule is updated, 
@@ -114,7 +129,7 @@ However, the notion of optimal rules is useful for determining the scenarios in 
 The next section uses the notion of optimal rules to formalize the concept of polarization and to establish the 
 main prediction of the theory. 
 
-## Polarization
+### Polarization
 To study polarization, we take the definition of @Haghtalab2021: two DMs are said to be 
 polarized if, when observing the same realization of observables, they predict the state to be different. That is, 
 they both observe the same draw of $x=(x_1, ..., x_N)$ but one DM predicts the state to be **B** and the other 
@@ -129,7 +144,7 @@ observables $x=(x_1, ..., x_N)$ must be such that $M_1$ makes a different predic
 2-dimensional example illustrates why the use of different models is necessary but not sufficient for polarization 
 to arise.
 
-#### Example
+##### Example
 _The optimal rule for the complex model coincides with the truth, it predicts **B** if $x_2+1\geq x_1$. 
 In addition, there are two simple models: one that considers only $x_1$---call it $M_1$---and one that considers 
 only $x_2$---call it $M_2$. The optimal rules for $M_1$ and $M_2$ are threshold rules that predict the state is **B** 
@@ -152,6 +167,9 @@ to their models.
 # Experimental Design
 ```{r read-data-all}
 data <- fread(here("data", "clean", "all.csv"))
+part1 <- fread(here("data", "clean", "part1.csv"))
+part2 <- fread(here("data", "clean", "part2.csv"))
+
 ```
 
 Subjects for the experimet were recruited from the CESS lab subject pool at NYU. 
@@ -187,22 +205,54 @@ In each round, subjects were asked to predict the state. They were given feedbac
 Both subjects within a pair were shown exactly the same realization of the variables and had to predict the same state. This allows
 us to determine whether the pair was polarized  or not for that particular observation. 
 
-Part 2 started immediatly after part 1. In this part each subject was randomly allowed to use only a certain number of variables
-in order to make their prediction. Instead of showing them the realizations of all 5 variables, they were told that they can 
-disclose up to $K$ variables, where $K$ was drawn at random from the set $\{1, 2, ..., 5\}$ at every round and it was drawn 
-independently across subjects. We take the variables that they chose to reveal as the model that each subject using for predicting 
-the state and use that model to detrmine whether the theory would predict the pair to be polarized or not. In addition, we use 
-the random assignment of $K$ to investigate whether the subjects are using siumple or complex models. If allowing subjects to 
-disclose an additional variable improves their prediction accuracy, then it must be that they are in fact using the additional
-information for prediciton. If, on the other hand, they do not perform better when they have access to more information, it must be
-that although they are disclosing an additional variable, they do not correctly incorporate the infomation into their prediciton 
-rule. Thus, if we observe that the performance of our subjects does not improve when they are allowed to disclose $K+1$ variables, 
+Part 2 started immediatly after part 1 and has 70 rounds. In this part each subject was randomly allowed to use only a certain 
+number of variables in order to make their prediction. Instead of showing them the realizations of all 5 variables, they were 
+told that they can disclose up to $K$ variables, where $K$ was drawn at random from the set $\{1, 2, ..., 5\}$. K was redrawn
+independently every round and across subjects. We use the random assignment of $K$ to investigate whether the subjects are using 
+siumple or complex models. If allowing subjects to disclose an additional variable improves their prediction accuracy, 
+then it must be that they are in fact using the additional information for prediciton. If, on the other hand, they do not perform 
+better when they have access to more information, it must be that although they are disclosing an additional variable, 
+they do not correctly incorporate the infomation into their prediciton rule. Thus, if we observe that the performance of our 
+subjects does not improve when they are allowed to disclose $K+1$ variables, 
 relative to their performance when they were allowed to disclose only $K$ variables, their model of the world must be of size $K$
 or lower. This feature design allows us to test prediciton 1 and 1B and determine the number of variables that subjects are using.
 
-# Data
+In order to explore the polarization prediciton, we use the fact that subjects are in fixed pairs throughout the experiment.
+Both subjects in a pair observe the same realization of all the variables in each round. Therefore, we can determine whether
+they are polarized or not by looking at whether they make the same prediction or not. We can then determine whether the theory 
+predicts that they should be polarized or not by looking at the polarization zone corresponding to the models that they are using.
+If the draw of the variables falls into the polarization zone, then the theory predicts that they should be polarized. The models
+that we use for this prediction are the ones that include the variables that they chose to reveal in that round. It could be that
+although they are revealing certain variables, they are not using them for prediction, however, we do not have a good way to 
+determine this. Instead, we use the variables that they reveal as a proxy for the variables that they are using for prediction and 
+ determine the polarization zones for those models.
+
 
 # Results
+
+In this section we present the results from the experiment. We start by exploring the general learning patterns of the subjects
+as well as the model choices. We then look at the effect of allowing subjects to disclose an additional variable and lastly we
+look at the polarization results.
+
+### Learning
+In the first part of the experiment, subjects were asked to predict the state given the realization of all the variables.
+Having access to all the information they could predict the state perfectly if they managed to learn the parameters of the
+hyperplane that determines the state. Figure \ref{learningAll} shows the share of correct predictions across rounds in part 1. 
+We see that subjects are able to learn how to predict the state at a rate that is higher than random. They initially predict
+the state corectly about 50% of the time, which is consistent with random guessing. The share of correct guesses increases to 
+`r 100*round(part1[subsession.round_number>15, mean(player.correct)], digits=2)`% by the end of part 1. And this last number is 
+significantly higher than 50% 
+(p-value = `r round(t.test(part1[subsession.round_number>10, player.correct], mu=0.5)$p.value, digits=4)`). 
+They continue to learn even after the first 20 rounds when we look at the rounds in which subjects had access to all the information.
+By the end of the experiment the rate of correct predictions is 
+`r 100*round(part2[subsession.round_number>30, mean(player.correct)], digits=2)`% which is still significantly higher than 50%
+(p-value = `r round(t.test(part2[subsession.round_number>30, player.correct], mu=0.5)$p.value, digits=4)`).
+
+```{r learningAll, out.width='50%', fig.align='center', fig.cap='\\label{learningAll} Share of correct predictions across rounds'}
+knitr::include_graphics(here("computed_objects", "figures", "learning_all.png"))
+```
+
+
 
 # Conclusion
 

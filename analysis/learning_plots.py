@@ -23,7 +23,7 @@ sns.lmplot(data=all_rounds[all_rounds['round_number_modif']<21], x="subsession.r
             x_bins=5, aspect=1.5, height=5)
 # add a line at .5 that indicates the random guess level 
 plt.axhline(.5, 0, 1, color = 'grey')
-
+plt.tight_layout()
 plt.xlabel('round number')
 plt.ylabel('share correct guesses')
 
@@ -35,7 +35,7 @@ plt.savefig('computed_objects/figures/learning_part1.png')
 # truncate the data at round 60 since there are only few observations after that
 sns.lmplot(data=all_rounds[(all_rounds['player.number_variables']>3) & (all_rounds['round_number_modif']<61)], x="round_number_modif", y="player.correct", 
             x_bins=10, aspect=1.5, height=5)
-
+plt.tight_layout()
 plt.xlabel('round number')
 plt.ylabel('share correct')
 plt.axhline(.5, 0, 1, color = 'grey')
