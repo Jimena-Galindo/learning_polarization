@@ -119,7 +119,18 @@ pairs[(pairs['p2_x1']==pairs['p1_x1'])&(pairs['p2_x2']==pairs['p1_x2'])&(pairs['
 pairs.loc[pairs['p1_guess']!=pairs['p2_guess'], 'polarized']=1
 pairs.loc[pairs['p1_guess']==pairs['p2_guess'], 'polarized']=0
 
+# count the number of guesses they got right in the first 20 rounds of part 2
+guesses2040 = part2[(part2['subsession.round_number']<=20)].groupby('participant.code').sum()['player.correct']
+# add the count column to the all_rounds table
+all_rounds = all_rounds.merge(guesses2040, on='participant.code').rename(columns={'player.correct_y':'2040_count', 'player.correct_x':'player.correct'})
+# create an indicator for whether they were better than random in the first 20 rounds of part 2
+all_rounds.loc[all_rounds['2040_count']>10, 'better_random_2040'] = 1
+all_rounds.loc[all_rounds['2040_count']<=10, 'better_random_2040'] = 0
 
+# add the indicator to the part2 table
+part2 = part2.merge(guesses2040, on='participant.code').rename(columns={'player.correct_y':'2040_count', 'player.correct_x':'player.correct'})
+part2.loc[part2['2040_count']>10, 'better_random_2040'] = 1
+part2.loc[part2['2040_count']<=10, 'better_random_2040'] = 0
 
 # Save all the data in clean format
 

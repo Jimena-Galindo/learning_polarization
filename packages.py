@@ -10,9 +10,9 @@ from pathlib import Path
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from stargazer.stargazer import Stargazer
+import pickle
 
 # load the data in long format for each part
 part1 = pd.read_csv('data/clean/part1.csv')
 all_rounds = pd.read_csv('data/clean/all.csv')
 part2 = pd.read_csv('data/clean/part2.csv', dtype={'model': str})
-

@@ -55,7 +55,7 @@ p2_performance_effect_assigned = computed_objects/figures/p2_performance_effect_
 p2_performance_by_model        = computed_objects/figures/p2_performance_by_model.png
 p2_performance_model_choices_2var = computed_objects/figures/p2_performance_model_choices_2var.png
 regression_revealed            = computed_objects/tables/regression_revealed.txt
-regression_assigned            = computed_objects/tables/regression_assigned.txt
+regression_assigned_mod        = computed_objects/tables/regression_assigned_mod.pkl
 ttest_assigned                 = computed_objects/tables/ttest_assigned.txt
 ttest_revealed                 = computed_objects/tables/ttest_revealed.txt
 model_choices_2vars            = computed_objects/figures/model_choices_2vars.png
@@ -95,7 +95,7 @@ plots += $(p2_performance_effect_assigned)
 plots += $(p2_performance_by_model)
 plots += $(p2_performance_model_choices_2var)
 plots += $(regression_revealed)
-plots += $(regression_assigned)
+plots += $(regression_assigned_mod)
 plots += $(ttest_assigned)
 plots += $(ttest_revealed)
 plots += $(model_choices_2vars)
@@ -136,7 +136,7 @@ $(p2_correct_rounds) $(p2_performance_effect_revealed) $(p2_performance_effect_a
 
 
 #recipe that describes how to build the regression tables
-$(regression_revealed) $(regression_assigned) $(ttest_assigned) $(ttest_revealed): $(part2) $(part1) $(all) analysis/regressions.py
+$(regression_revealed) $(ttest_assigned) $(ttest_revealed) $(regression_assigned_mod): $(part2) $(part1) $(all) analysis/regressions.py
 	@echo "Regression tables"
 	python analysis/regressions.py
 
@@ -170,7 +170,7 @@ plots_clean:
 # Writeup
 ###############################################
 
-paper: paper/paper.Rmd paper/compile_paper.R $(plots)
+paper: paper/paper.Rmd paper/compile_paper.R $(plots) paper/extra_header.tex
 	@echo "Compile the paper"
 	@Rscript paper/compile_paper.R
 

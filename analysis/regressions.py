@@ -12,6 +12,7 @@ import statsmodels.formula.api as smf
 from stargazer.stargazer import Stargazer
 from linearmodels.panel import RandomEffects
 import linearmodels
+import pickle
 
 # load the data in long format for each part
 part1 = pd.read_csv('data/clean/part1.csv')
@@ -26,11 +27,7 @@ mod = smf.ols(formula='y ~ indic_1 + indic_2+ indic_3 + indic_4 + indic_5  - 1',
 
 res_assigned = mod.fit(cov_type='HC3')
 
-stargazer = Stargazer([res_assigned], )
-
-with open('computed_objects/tables/regression_assigned.txt', 'w') as f:
-    f.write(stargazer.render_latex())
-
+res_assigned.save('computed_objects/tables/regression_assigned_mod.pkl')
 
 
 # For the regression using assignment to treatment directly,

@@ -19,21 +19,9 @@ part1 = pd.read_csv('data/clean/part1.csv')
 all_rounds = pd.read_csv('data/clean/all.csv')
 part2 = pd.read_csv('data/clean/part2.csv', dtype={'model': str})
 
-# count the number of guesses they got right in the first 20 rounds of part 2
-guesses2040 = part2[(part2['subsession.round_number']<=20)].groupby('participant.code').sum()['player.correct']
-# add the count column to the all_rounds table
-all_rounds = all_rounds.merge(guesses2040, on='participant.code').rename(columns={'player.correct_y':'2040_count', 'player.correct_x':'player.correct'})
-# create an indicator for whether they were better than random in the first 20 rounds of part 2
-all_rounds.loc[all_rounds['2040_count']>10, 'better_random_2040'] = 1
-all_rounds.loc[all_rounds['2040_count']<=10, 'better_random_2040'] = 0
 # plot the performance across all rounds by performance in the first 20 rounds of part 2
 sns.lmplot(data=all_rounds[all_rounds['round_number_modif']<=60], x="round_number_modif", y="player.correct", x_bins=10, hue='better_random_2040')
 plt.savefig('computed_objects/figures/p2_correct_rounds.png')
-
-# add the indicator to the part2 table
-part2 = part2.merge(guesses2040, on='participant.code').rename(columns={'player.correct_y':'2040_count', 'player.correct_x':'player.correct'})
-part2.loc[part2['2040_count']>10, 'better_random_2040'] = 1
-part2.loc[part2['2040_count']<=10, 'better_random_2040'] = 0
 
 # Accuracy wrt number of variables that they chose to reveal and by performance in part2
 fig, axs = plt.subplots()

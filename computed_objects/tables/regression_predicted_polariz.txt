@@ -6,9 +6,9 @@
 \cr \cline{1-2}
 \\[-1.8ex] & (1) \\
 \hline \\[-1.8ex]
- Intercept & 0.393$^{***}$ \\
-  & (0.064) \\
- predicted_polarization & 0.036$^{}$ \\
+ Intercept & 0.399$^{***}$ \\
+  & (0.063) \\
+ predicted_polarization & 0.030$^{}$ \\
   & (0.097) \\
  round_number_modif & 0.000$^{}$ \\
   & (0.001) \\
@@ -16,10 +16,10 @@
   & (0.002) \\
 \hline \\[-1.8ex]
  Observations & 870 \\
- $R^2$ & 0.004 \\
- Adjusted $R^2$ & 0.001 \\
- Residual Std. Error & 0.496(df = 866)  \\
- F Statistic & 1.252$^{}$ (df = 3.0; 866.0) \\
+ $R^2$ & 0.008 \\
+ Adjusted $R^2$ & 0.004 \\
+ Residual Std. Error & 0.495(df = 866)  \\
+ F Statistic & 2.170$^{*}$ (df = 3.0; 866.0) \\
 \hline
 \hline \\[-1.8ex]
 \textit{Note:} & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\

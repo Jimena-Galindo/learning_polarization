@@ -64,7 +64,20 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setcounter{secnumdepth}{5}
+
+\setlength{\parindent}{25pt}
+\setlength{\parskip}{0pt}
+\setlength{\skip\footins}{0.25cm} % margin before footnotes
+\definecolor{myblue}{RGB}{31, 61, 122}
+\definecolor{mypink}{RGB}{204, 0, 82}
+\newtheorem{assumption}{Assumption}
+\newtheorem{proposition}{Proposition} % Use the 'proposition' counter for numbering
+
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\PP}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\CP}[2]{\mathbb{P}\left(#1 \,| \, #2 \right)}
+\newcommand{\CE}[2]{\mathbb{E}\left[#1\,|\,#2 \right]}
 \usepackage[bottom]{footmisc}
 \usepackage[doublespacing]{setspace}
 \usepackage[normal]{caption}
@@ -72,6 +85,19 @@
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{hyperref}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[normalem]{ulem}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -88,7 +114,7 @@
 
 \title{Learning from Data Through Models}
 \author{Alberto Bisin, Guillaume Frechette and Jimena Galindo}
-\date{July 11, 2023}
+\date{July 13, 2023}
 
 \begin{document}
 \maketitle
@@ -99,12 +125,8 @@ TBW
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-TBW
-
 \hypertarget{literature-review}{%
 \section{Literature Review}\label{literature-review}}
-
-TBW
 
 \hypertarget{framework-and-predictions}{%
 \section{Framework and Predictions}\label{framework-and-predictions}}
@@ -169,7 +191,7 @@ considers \(K\) variables, allowing them to use \(K+1\) variables will
 not increase the frequency with which they make correct predictions.
 
 \hypertarget{optimal-rules}{%
-\subsubsection{Optimal Rules}\label{optimal-rules}}
+\subsection{Optimal Rules}\label{optimal-rules}}
 
 Conditional of using a particular mental model, the most accurate
 prediction rule that the agent can use is one that predicts the state to
@@ -201,36 +223,31 @@ parameters that pertain the variables in \(M\) plus a constant term. The
 following proposition illustrates exactly what the optimal prediction
 rules look like when the agent is able to learn perfectly.
 
-\hypertarget{proposition.}{%
-\subparagraph{Proposition.}\label{proposition.}}
+\begin{proposition}
+Fix any model that considers $m\leq N$ variables and relabel the variable so that $x_1, ..., x_m$ are the variables 
+that the model considers and $x_{m+1}, ..., x_N$ are the ones that the model does not consider. Relabel the 
+coefficients $a = (a_1, ..., a_N)$ accordingly as well. 
+\end{proposition}
 
-\emph{Fix any model that considers \(m\leq N\) variables and relabel the
-variable so that \(x_1, ..., x_m\) are the variables that the model
-considers and \(x_{m+1}, ..., x_N\) are the ones that the model does not
-consider. Relabel the coefficients \(a = (a_1, ..., a_N)\) accordingly
-as well.}
-
-\hypertarget{proof.}{%
-\subparagraph{proof.}\label{proof.}}
-
-\emph{Let \(M:=a_1x_1+...+a_mx_m\) and
+\emph{Proof}. Let \(M:=a_1x_1+...+a_mx_m\) and
 \(M^c = a_{m+1}x_{m+1}+...+a_Nx_N+k\) and define the latent variable
 \(y^L := M + M^c\). The optimal prediction rule for model \(M\) predicts
 the state to be \(\textbf{B}\) whenever \(P[y^L|M]\geq \frac{1}{2}\) and
-predicts \(\textbf{R}\) otherwise.}
+predicts \(\textbf{R}\) otherwise.
 
-\emph{Using the fact that for a random variable
-\(z\sim N(\mu_z, \sigma_z)\) we have that \(P[z\geq \mu_z]=\frac{1}{2}\)
-and noticing that \(M^c\) and \(y^L|M\) are Normally distributed with
-means \(\mathbb{E}[M^c]\) and \(M+\mathbb{E}[M^c]\) respectively, it is
-easy to see that
+Using the fact that for a random variable \(z\sim N(\mu_z, \sigma_z)\)
+we have that \(P[z\geq \mu_z]=\frac{1}{2}\) and noticing that \(M^c\)
+and \(y^L|M\) are Normally distributed with means \(\mathbb{E}[M^c]\)
+and \(M+\mathbb{E}[M^c]\) respectively, it is easy to see that
 \(P[y^L\geq 0 | M] \geq P[y^L\geq M+\mathbb{E}[M^c | M]]=\frac{1}{2}\)
 whenever \(M+\mathbb{E}[M^c]\geq 0\). Similarly, whenever
 \(M+\mathbb{E}[M^c]< 0\) we will have that
 \(P[y^L\geq 0 | M] < P[y^L\geq M+\mathbb{E}[M^c | M]]=\frac{1}{2}\).
 Therefore, the optimal rule is to predict \(\mathbf{B}\) whenever
-\(a_1x_1+...+a_kx_k\geq -\mathbb{E}[M^c]\) and \(\textbf{R}\)
-otherwise.}
+\(a_1x_1+...+a_kx_k\geq -\mathbb{E}[M^c]\) and \(\textbf{R}\) otherwise.
+\(\quad \square\)
+
+\hfill\break
 
 With limited data, it is not guaranteed that the agent is able to
 perfectly learn the parameters required for the optimal rule. However,
@@ -241,41 +258,36 @@ optimal rules to formalize the concept of polarization and to establish
 the main prediction of the theory.
 
 \hypertarget{polarization}{%
-\subsubsection{Polarization}\label{polarization}}
+\subsection{Polarization}\label{polarization}}
 
 We take the definition of polarization from \citet{Haghtalab2021}: two
-agents are said to be polarized if, when observing the same realization
-of observables, they predict the state to be different. That is, they
-both observe the same draw of \(x=(x_1, ..., x_N)\) but one agent
-predicts the state to be \textbf{B} and the other predicts the state to
-be \textbf{R}.
+agents are said to be polarized if, when observing the realization of X,
+they predict the state to be different. That is, they both observe the
+same draw of \((x_1, ..., x_N)\) but one agent predicts the state to be
+\textbf{B} and the other predicts the state to be \textbf{R}.
 
 Within out framework---as in \citet{Haghtalab2021}---polarization may
-persist even when agents have access to infinite data because they might
-be using different models of the world. Nevertheless using different
-models does not necessarily imply that beliefs will always be polarized,
-it must also be the case that the realization of observables falls in a
-\emph{disagreement zone}. By disagreement zone, we simply mean that if
-the two models that are being used for prediction are \(M_1\) and
-\(M_2\), the realization of the observables \(x=(x_1, ..., x_N)\) must
-be such that \(M_1\) makes a different prediction from \(M_2\). The
-following 2-dimensional example illustrates why the use of different
-models is necessary but not sufficient for polarization to arise.
+persist even when agents have access to unlimited data. There are two
+factors that dare necessary for polarization to arise: the use of
+different models and the realization of the observables must be such
+that the models will make different predictions. It is important to
+observe that even when agents are using different models, not all
+realiations of \(X\) will produce polarized predictions. The following
+2-dimensional example illustrates why the use of different models is
+necessary but not sufficient for polarization to arise.
 
-\hypertarget{example}{%
-\subparagraph{Example}\label{example}}
-
-\emph{The optimal rule for the complex model coincides with the truth,
-it predicts \textbf{B} if \(x_2+1\geq x_1\). In addition, there are two
-simple models: one that considers only \(x_1\)---call it \(M_1\)---and
-one that considers only \(x_2\)---call it \(M_2\). The optimal rules for
-\(M_1\) and \(M_2\) are threshold rules that predict the state is
-\textbf{B} if the value of \(x_i\) is below (above) the threshold
-\(t_i := \mu_{-i} + k\) and the predicted state is \textbf{R} otherwise.
-These prediction rules are illustrated in . As Figure \ref{example}
-makes clear, both rules agree on the predicted state for some values of
-\((x_1, x_2)\) and disagree for other values. The regions in which the
-rules make different predictions are the disagreement zones.}
+\textbf{Example.} \emph{The optimal rule for the complex model coincides
+with the truth, it predicts \textbf{B} if \(x_2-1\geq x_1\). In
+addition, there are two simple models: one that considers only
+\(x_1\)---call it \(M_1\)---and one that considers only \(x_2\)---call
+it \(M_2\). The optimal rules for \(M_1\) and \(M_2\) are threshold
+rules that predict the state is \textbf{B} if the value of \(x_i\) is
+below (above) the threshold \(t_i := \mu_{-i} + k\) and the predicted
+state is \textbf{R} otherwise. These prediction rules are illustrated in
+. As Figure \ref{examp} makes clear, both rules agree on the predicted
+state for some values of \((x_1, x_2)\) and disagree for other values.
+The regions in which the rules make different predictions are the
+disagreement zones.}
 
 \begin{figure}
 
@@ -283,54 +295,52 @@ rules make different predictions are the disagreement zones.}
 
 }
 
-\caption{\label{example} Polarization regions for two single variable models}\label{fig:example}
+\caption{\label{examp} Polarization regions for two single variable models}\label{fig:unnamed-chunk-1}
 \end{figure}
 
 For any pair of agents who observe the same realization of the
 observables and use different models, it is possible to determine
 whether they will be polarized or not by looking at the predictions made
-by the optimal rule corresponding to their models. Notice that the
-polarizing observations---those that fall into a polarization zone---are
-different for each pair of models. Also notice that our definition of
-the polarization zone assumes that the agents are using optimal rules.
-This is a very strong assumption and will most likely not be the case
-that subjects in the experiment learn perfectly. This is a theoretical
-construct that allows us to formalize Prediction 2.
+by the optimal rule corresponding to their models. Polarizing
+observations---those for which the predictions are different---are
+different for each pair of models. Also notice that we determine whether
+an observation is polarizing or not by using the optimal rules. We do
+not expect subjects in our experiment to converge to the optimal rule,
+this is a theoretical construct that allows us to formalize Prediction
+2.
 
 \textbf{Prediction 2 :} Polarization will arise more often when the
 theory predicts so. That is, when two agents who have different models
-of the world, are facing a realization of observables that falls into
-the polarization zone corresponding to their models.
+of the world, are facing a realization of observables that polarizing
+for their models.
 
 \hypertarget{experimental-design}{%
 \section{Experimental Design}\label{experimental-design}}
 
-Subjects for the experimet were recruited from the CESS lab subject pool
-at NYU. We recruited 30 undergraduate students who participated in this
-experiment in person durinf the summer and fall of 2023. The experiment
-was coded using o-tree \citet{otree} and it consisted of two parts: Part
-1 was meant to expose the subjects to the data generating process and
-allow them to learn how to predict; part 2 was meant to elicit the
-models of the world that subjects might have developed in part 1.
+Subjects for the experimet were recruited from NYU's CESS-lab subject
+pool. We recruited 30 undergraduate students who participated in this
+experiment in person during the summer and fall of 2023. The experiment
+was coded using oTree (\citet{otree}) and it consisted of two parts:
+Part 1 was meant to expose the subjects to the data generating process
+and allow them to learn how to predict the state; part 2 was meant to
+elicit the models of the world that subjects might have developed in
+part 1.
 
 Part 1 consited of 20 rounds in which subjects observed the realizations
 of all of the observables and were asked to predict the state. We had 5
 observable variables called variable 1, 2, 3, 4 and 5. The variables
 were independent and Normally distributed with means and variances as
-described in TABLE.
+described in Table \ref{params}.
 
-The state was determined by the following rule:
-\(11x_1+6x_2+4.5x_3+2.4*x_4+k \geq 0\). The values of the coefficients
+The state was determined by the following linear rule:
+\(11x_1+6x_2+4.5x_3+2.4x_4+k \geq 0\). The values of the coefficients
 were chosen so that all variables had a similar but unique level of
-informativeness when considered on their own. In this case, because all
-the variables are normally distributed, the information that they convey
-about the state is related to the variance of the modified normal
-\(a_ix_i\). The constant \(k\) was chosen so that the state was
-\textbf{B} in 50\% of the cases. The last column of TABLE shows the
-probability of the optimal prediction rule making a correct prediction
-when the model used considers only each variable by itself. This is the
-measure that we use to determine the informativeness of each variable
-and is reported in the last column of TABLE.
+informativeness when considered on their own. The constant \(k\) was
+chosen so that the state was \textbf{B} in 50\% of the cases. The last
+column of Table \ref{params} shows the probability of the optimal
+prediction rule making a correct prediction when for each
+single-variable model. This is the measure that we use to determine the
+informativeness of each variable.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1159}}
@@ -339,6 +349,24 @@ and is reported in the last column of TABLE.
   >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2464}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2464}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2174}}@{}}
+\caption{Parameters for the Data Generating Process
+\label{params}}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Variance
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Modified Variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Modified Variance
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Informativeness
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Variable
@@ -365,47 +393,53 @@ Informativeness
 \end{longtable}
 
 In each round, subjects were asked to predict the state. They were given
-feedback on whether their prediction was correct or not. Both subjects
-within a pair were shown exactly the same realization of the variables
-and had to predict the same state. This allows us to determine whether
-the pair was polarized or not for that particular observation.
+feedback on whether their prediction was correct or not and they had
+access to the entire history of the game. Throughout the experiment,
+subjects were paired with another participant at random. Both subjects
+in a pair were shown exactly the same realization of the variables and
+had to predict the same state. This allows us to determine whether the
+pair was polarized for that particular observation. Subjects were not
+told that there was someone else observing the same realizations as
+them.
 
-Part 2 started immediatly after part 1 and has 70 rounds. In this part
-each subject was randomly allowed to use only a certain number of
-variables in order to make their prediction. Instead of showing them the
-realizations of all 5 variables, they were told that they can disclose
-up to \(K\) variables, where \(K\) was drawn at random from the set
-\(\{1, 2, ..., 5\}\). K was redrawn independently every round and across
-subjects. We use the random assignment of \(K\) to investigate whether
-the subjects are using siumple or complex models. If allowing subjects
-to disclose an additional variable improves their prediction accuracy,
-then it must be that they are in fact using the additional information
-for prediciton. If, on the other hand, they do not perform better when
-they have access to more information, it must be that although they are
+Part 2 started immediatly after part 1 and had 70
+rounds\footnote{In the first 2 sessions we had 40 rounds in part 2
+and the experiment was done in under 30 minutes. Because the experiment concluded in less time than expected, we increased the 
+number of rounds to 70 for the following sessions. Only 12 of our subjects participated in the sessions with 40 rounds, all others 
+were in sessions with 70 rounds for part 2}. In instead of showing
+subjects the realizations of all 5 variables, they were told that they
+can disclose up to \(m\) variables, where \(m\) was drawn at random from
+the set \(\{1, 2, ..., 5\}\). m was redrawn independently across rounds
+and across subjects.
+
+We use the random assignment of \(m\) to investigate whether the
+subjects are using siumple or complex models. If allowing subjects to
+disclose an additional variable improves their prediction accuracy, then
+it must be that they are in fact using the additional information for
+prediciton. If, on the other hand, they do not perform better when they
+have access to more information, it must be that, although they are
 disclosing an additional variable, they do not correctly incorporate the
-infomation into their prediciton rule. Thus, if we observe that the
+infomation into their prediction rule. Thus, if we observe that the
 performance of our subjects does not improve when they are allowed to
-disclose \(K+1\) variables, relative to their performance when they were
-allowed to disclose only \(K\) variables, their model of the world must
-be of size \(K\) or lower. This feature design allows us to test
-prediciton 1 and 1B and determine the number of variables that subjects
+disclose \(m+1\) variables, relative to their performance when they were
+allowed to disclose only \(m\) variables, their model of the world must
+be of size \(m\) or lower. This feature design allows us to test
+predictions 1 and 1B and determine the number of variables that subjects
 are using.
 
-In order to explore the polarization prediciton, we use the fact that
+In order to explore the polarization prediction, we use the fact that
 subjects are in fixed pairs throughout the experiment. Both subjects in
 a pair observe the same realization of all the variables in each round.
 Therefore, we can determine whether they are polarized or not by looking
 at whether they make the same prediction or not. We can then determine
 whether the theory predicts that they should be polarized or not by
-looking at the polarization zone corresponding to the models that they
-are using. If the draw of the variables falls into the polarization
-zone, then the theory predicts that they should be polarized. The models
-that we use for this prediction are the ones that include the variables
-that they chose to reveal in that round. It could be that although they
-are revealing certain variables, they are not using them for prediction,
-however, we do not have a good way to determine this. Instead, we use
-the variables that they reveal as a proxy for the variables that they
-are using for prediction and determine the polarization zones for those
+looking at what the optimal rules for those models dictate. We use the
+optimal rules that correcpond to the variables that they chose to reveal
+in that round. It could be that although they are revealing certain
+variables, they are not using them for prediction. Since we do not have
+a good method to determine which variables they actually pay attention
+to, we use the variables that they reveal as a proxy for the variables
+that they are using for prediction and apply the optimal rules for those
 models.
 
 \hypertarget{results}{%
@@ -417,8 +451,7 @@ model choices. We then look at the effect of allowing subjects to
 disclose an additional variable and lastly we look at the polarization
 results.
 
-\hypertarget{learning}{%
-\subsubsection{Learning}\label{learning}}
+\subsection{Learning}
 
 In the first part of the experiment, subjects were asked to predict the
 state given the realization of all the variables. Having access to all
@@ -430,11 +463,11 @@ the state at a rate that is higher than random. They initially predict
 the state corectly about 50\% of the time, which is consistent with
 random guessing. The share of correct guesses increases to 59\% by the
 end of part 1. And this last number is significantly higher than 50\%
-(p-value = \ensuremath{3\times 10^{-4}}). They continue to learn even
-after the first 20 rounds when we look at the rounds in which subjects
-had access to all the information. By the end of the experiment the rate
-of correct predictions is 59\% which is still significantly higher than
-50\% (p-value = 0).
+(p-value = 0.00031). They continue to learn even after the first 20
+rounds when we look at the rounds in which subjects had access to all
+the information. By the end of the experiment the rate of correct
+predictions is 59\% which is still significantly higher than 50\%
+(p-value = 0.00000019).
 
 \begin{figure}
 
@@ -442,8 +475,217 @@ of correct predictions is 59\% which is still significantly higher than
 
 }
 
-\caption{\label{learningAll} Share of correct predictions across rounds}\label{fig:learningAll}
+\caption{\label{learningAll} Share of correct predictions across rounds by performance in rounds 20 to 40}\label{fig:learningAll}
 \end{figure}
+
+We also observe that there is heterogeneity in how our subjects learn.
+In particular, in the first 20 rounds of part 2 we are able to identify
+two distinct groups of subjects: those who guess more than 50\% of the
+states correctly and those who guess 50\% of fewer of them correctly. As
+can seen in \ref{p2groups}, these two groups have very different
+learning patterns throughout the experiment. The group that does better
+than random in rounds 20 to 40 (the first 20 rounds of part 2) consists
+of 20 subjects, which account for 67\% of the sample. These subjects
+improved their performance from 50\% to 64\% in the first 20 rounds of
+part 2, and continued to improve to get to 69\% by the end of part 2.
+Meanwhile, the group that does worse than random in rounds 20 to 40
+consists of 10 subjects and they do not seem to learn how to predict the
+state more accurately even after all 60 rounds of the experiment.
+Whenever it is relevant, we will show results separately for these two
+groups.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{../computed_objects/figures/p2_correct_rounds} 
+
+}
+
+\caption{\label{p2groups} Share of correct predictions across rounds}\label{fig:p2groups}
+\end{figure}
+
+\hypertarget{simplicity}{%
+\subsection{Simplicity}\label{simplicity}}
+
+In part 2, subjects were allowed to disclose up to \(m\) variables
+before making their predictions. and \(m\) was assigned at random for
+every subject in every round. We use this random assignment to
+understand if allowing them to reveal an additional variable improves
+their prediction accuracy. If it does, it must be that they are using
+the additional information for prediction. Figure \ref{simplicity} shows
+the share of correct predictions by the number of variables that
+subjects chose to disclose.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{../computed_objects/figures/revealed_variables_pooled} 
+
+}
+
+\caption{\label{simplicity} Share of correct predictions by number of disclosed variables}\label{fig:simplicity}
+\end{figure}
+
+We see that there is a sharp increase when going from 1 to 2 variables,
+but no significant increase when going from 2 to 3 and beyond. This
+suggests that on average subjects are using mental models that consider
+2 variables. However, since subjects were allowed to reveal fewer
+variables than what was assigned to them, the estimates in
+\ref{simplicity} might be biased. To account for this, we look at the
+share of correct predictions by the number of variables that subjects
+were allowed to disclose. The results are presented in Table
+
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+ \label{tab:unnamed-chunk-2}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l}
+
+
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Disclosed \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Allowed \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Zero variables \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.489 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.072)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} One variable \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.534 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.535 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.027)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.023)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Two variables \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.602 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.598 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.027)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.027)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Three variables \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.584 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.600 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.027)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.029)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Four variables \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.599 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.611 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.025)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.028)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Five variables \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.576 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.590 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.027)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (0.030)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} N. obs. \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1740\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1740\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} R squared \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.580\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.581\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\arrayrulecolor{black}
+
+\multicolumn{3}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  *** p $<$ 0.001;  ** p $<$ 0.01;  * p $<$ 0.05. \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
+
+\end{table}
+ 
+
+\hypertarget{model-choices}{%
+\subsection{Model Choices}\label{model-choices}}
+
+\hypertarget{polarization-results}{%
+\subsection{Polarization Results}\label{polarization-results}}
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
