@@ -157,6 +157,24 @@ $(model_count): $(part2) $(part1) $(all) analysis/model_exploration.py
 	python analysis/model_exploration.py
 
 
+###############################################
+# Regression analysis
+###############################################
+# files to build:
+
+regressions = computed_objects/tables/regressions.rds
+
+# recipe that describes how to build the test_model
+$(regressions): analysis/regressions.R
+	@echo "Regressions"
+	Rscript analysis/regressions.R
+
+hypothesis_tests = computed_objects/tables/hypothesis_tests.rds
+
+# recipe that describes how to build the hypothesis_tests
+$(hypothesis_tests): analysis/hypothesis_tests.R $(regressions)
+	@echo "Hypothesis tests"
+	Rscript analysis/hypothesis_tests.R
 
 # This recipe concludes when plots are built
 plots: $(plots)
@@ -170,7 +188,7 @@ plots_clean:
 # Writeup
 ###############################################
 
-paper: paper/paper.Rmd paper/compile_paper.R $(plots) paper/extra_header.tex
+paper: paper/paper.Rmd paper/compile_paper.R $(plots) paper/extra_header.tex $(regressions) $(hypothesis_tests)
 	@echo "Compile the paper"
 	@Rscript paper/compile_paper.R
 

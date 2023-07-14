@@ -132,6 +132,11 @@ part2 = part2.merge(guesses2040, on='participant.code').rename(columns={'player.
 part2.loc[part2['2040_count']>10, 'better_random_2040'] = 1
 part2.loc[part2['2040_count']<=10, 'better_random_2040'] = 0
 
+# add a column that indicates the group in each session
+all_rounds.loc[: , 'group_id'] = all_rounds['session.code'] + all_rounds['group.id_in_subsession'].astype(str)
+part1.loc[: , 'group_id'] = part1['session.code'] + part1['group.id_in_subsession'].astype(str)
+part2.loc[: , 'group_id'] = part2['session.code'] + part2['group.id_in_subsession'].astype(str)
+
 # Save all the data in clean format
 
 path_p1 = Path('data/clean/part1.csv')  

@@ -11,6 +11,7 @@ output:
         fig_height: 6
         fig_caption: true
         number_sections: true
+        template: NULL
         keep_tex: true
         extra_dependencies:
             footmisc: ["bottom"] # footnote management
@@ -29,14 +30,10 @@ geometry: margin=2.5cm
 ---
 
 ```{r dependencies, include=FALSE}
-library(data.table)
-library(here)
-library(huxtable)
-library(broom)
-renv::snapshot()
-library("languageserver")
-library(reticulate)
+source("../parameters_and_packages.R")
+```
 
+```{r setup, include=FALSE}
 # Format the numbers in the inline code output
 inline_hook <- function(x){
   if(is.numeric(x)) {
@@ -188,7 +185,7 @@ These prediction rules are illustrated in . As Figure \ref{examp} makes clear, b
 some values of $(x_1, x_2)$ and disagree for other values. The regions in which the rules make different predictions
 are the disagreement zones._
 
-```{r, out.width='50%', fig.align='center', fig.cap='\\label{examp} Polarization regions for two single variable models'}
+```{r, out.width='65%', fig.align='center', fig.cap='\\label{examp} Polarization regions for two single variable models'}
 knitr::include_graphics(here("diagram_polariazation_2variables.png"))
 ```
 
@@ -291,7 +288,7 @@ By the end of the experiment the rate of correct predictions is
 `r 100*part2[subsession.round_number>30, mean(player.correct)]`% which is still significantly higher than 50%
 (p-value = `r t.test(part2[subsession.round_number>30, player.correct], mu=0.5)$p.value`).
 
-```{r learningAll, out.width='50%', fig.align='center', fig.cap='\\label{learningAll} Share of correct predictions across rounds by performance in rounds 20 to 40'}
+```{r learningAll, out.width='65%', fig.align='center', fig.cap='\\label{learningAll} Share of correct predictions across rounds by performance in rounds 20 to 40'}
 knitr::include_graphics(here("computed_objects", "figures", "learning_all.png"))
 ```
 
@@ -308,7 +305,7 @@ Meanwhile, the group that does worse than random in rounds 20 to 40 consists of 
 subjects and they do not seem to learn how to predict the state more accurately even after all 60 rounds of the experiment.
 Whenever it is relevant, we will show results separately for these two groups.
 
-```{r p2groups, out.width='50%', fig.align='center', fig.cap='\\label{p2groups} Share of correct predictions across rounds'}
+```{r p2groups, out.width='65%', fig.align='center', fig.cap='\\label{p2groups} Share of correct predictions across rounds'}
 knitr::include_graphics(here("computed_objects", "figures", "p2_correct_rounds.png"))
 ```
 
@@ -317,24 +314,35 @@ knitr::include_graphics(here("computed_objects", "figures", "p2_correct_rounds.p
 In part 2, subjects were allowed to disclose up to $m$ variables before making their predictions. and $m$ was assigned at random 
 for every subject in every round. We use this random assignment to understand if allowing them to reveal an additional variable 
 improves their prediction accuracy. If it does, it must be that they are using the additional information for prediction. 
-Figure \ref{simplicity} shows the share of correct predictions by the number of variables that subjects chose to disclose.
+Figure \ref{simplicity} shows the share of correct predictions by the number of variables that subjects chose to disclose. 
+Figure \ref{simplicity2} shows the number of variables that subjects chose to disclose by the number they we allowed to disclose.
+On average, they always disclose fewer variables than what is available to them. This is a strong indication that at least some
+of the subjects are using simple models. 
+Further evidence is provided by the accuracy of their predictions as discussed in what follows
 
-```{r simplicity, out.width='50%', fig.align='center', fig.cap='\\label{simplicity} Share of correct predictions by number of disclosed variables'}
+```{r simplicity2, out.width='65%', fig.align='center', fig.cap='\\label{simplicity2} Number of disclosed variables by number of allowed variables'}
+knitr::include_graphics(here("computed_objects", "figures", "revealed_available.png"))
+```
+
+```{r simplicity, out.width='65%', fig.align='center', fig.cap='\\label{simplicity} Share of correct predictions by number of disclosed variables'}
 knitr::include_graphics(here("computed_objects", "figures", "revealed_variables_pooled.png"))
 ```
+
 We see that there is a sharp increase when going from 1 to 2 variables, but no significant increase when going from 2 to 3 and
 beyond. This suggests that on average subjects are using mental models that consider 2 variables. However, since subjects were 
 allowed to reveal fewer variables than what was assigned to them, the estimates in \ref{simplicity} might be biased. To account 
-for this, we look at the share of correct predictions by the number of variables that subjects were allowed to disclose. The results 
-are presented in Table 
+for this, we also look at the share of correct predictions by the number of variables that subjects were allowed to disclose. The results 
+are presented in Table \ref{regression_table}. The table presents the regression estimates for the model with the assigned number of
+variables as well as the model with the number of variables that subjects chose to disclose. The last column clusters standard errors
+at the group level.
 
 
-```{r }
-m1 <- lm(player.correct ~ C(player.number_variables) - 1, data = part2)
-m2 <- lm(player.correct ~ C(revealed_variables_count) - 1, data = part2)
+```{r regressionTable}
+regs <- readRDS(here("computed_objects", "tables", "regressions.rds"))
 
-huxreg("Disclosed" = m2, 
-       "Allowed" = m1,
+regression_table <- huxreg("Disclosed" = regs$m2,
+                           "Allowed" = regs$m1,
+                           "Allowed" = regs$m4,
        coefs = c("Zero variables" = "C(revealed_variables_count)0",
                  "One variable" = "C(player.number_variables)1",
                  "One variable" = "C(revealed_variables_count)1",
@@ -345,13 +353,55 @@ huxreg("Disclosed" = m2,
                  "Four variables" = "C(player.number_variables)4",
                  "Four variables" = "C(revealed_variables_count)4",
                  "Five variables" = "C(player.number_variables)5",
-                 "Five variables" = "C(revealed_variables_count)5"), 
-        statistics = c("N. obs." = "nobs", "R squared" = "r.squared" ))
+                 "Five variables" = "C(revealed_variables_count)5"),
+        statistics = c("N. obs." = "nobs", "R squared" = "r.squared")
+        )
 
-      
+row <- data.frame("Clustered SE", "NO", "NO", "Group")
+regression_table <- insert_row(regression_table, row, after = 13)
+caption(regression_table) <- "Regression results, dependent variable is the share of correct predictions."
+label(regression_table) <- "regression_table"
+regression_table
 ```
 
+
+```{r hypothesesAll}
+# load the tables
+tables <- readRDS(here("computed_objects", "tables", "hypothesis_tests.rds"))
+results_tbl1 <- tables$tbl1
+results_tbl2 <- tables$tbl2
+results_tbl4 <- tables$tbl4
+# assigned variables
+test_assigned <- results_tbl1 %>% as_huxtable() %>% set_col_width(c(0.5, 0.25, 0.25))
+label(test_assigned) <- "test_assigned"
+caption(test_assigned) <- "Hypothesis tests for the regression with the number of variables that subjects were allowed to disclose."
+
+# clustered standard errors
+test_clustered <- results_tbl4 %>% as_huxtable() %>% set_col_width(c(0.5, 0.25, 0.25))
+label(test_clustered) <- "test_clustered"
+caption(test_clustered) <- "Hypothesis tests for the regression with the number of variables that subjects were allowed to disclose and clustered standard errors."
+
+# revealed variables
+test_revealed <- results_tbl2 %>% as_huxtable() %>% set_col_width(c(0.5, 0.25, 0.25))
+label(test_revealed) <- "test_revealed"
+caption(test_revealed) <- "Hypothesis tests for the regression with the number of variables that subjects chose to disclose."
+
+```
+
+
+We are interested in testing whether the probability of guessing the state correctly increases when subjects are allowed to 
+disclose an additional variable. This corresponds to testing the linear hypotheses $\beta_{m+1}-\beta_m=0$ for $m=1, 2, 3, 4$.
+The results of these tests are presented in Table \ref{hypotheses}. We see that the probability of guessing the state when subjects
+are allowed to disclose 2 variables is significantly higher than when they are allowed to disclose only 1 variable. And the effect 
+of having access to the additional variable is `r results_tbl4[2, Estimate]` percentage points. Allowing 3, 4 and 5 variables has no 
+effect, which sugests that subjects are using models that consider 2 variables. All the hypothesis tests are reported in 
+Tables \ref{test_assigned},\ref{test_revealed} and \ref{test_clustered} in the appendix.
+
+
+
 ## Model Choices
+Since we now know that subjects are using models that consider 2 variables, we can look at the specific models that they are using.
+We look at two particular features: Are they choosing the most informative models? and do they improve their model choices over time?
 
 
 
@@ -360,6 +410,13 @@ huxreg("Disclosed" = m2,
 
 # Conclusion
 
+
+\newpage
+\appendix
+
 # Appendix
-
-
+```{r appendix}
+test_revealed
+test_assigned
+test_clustered
+```

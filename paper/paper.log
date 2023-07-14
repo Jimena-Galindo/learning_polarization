@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  13 JUL 2023 15:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  14 JUL 2023 18:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -241,27 +241,14 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 \fn@notes=\box60
 \fn@width=\dimen176
-) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
-(/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
-(/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
-)
-Package graphics Info: Driver file: pdftex.def on input line 107.
-)
-\Gin@req@height=\dimen177
-\Gin@req@width=\dimen178
 )
 \c@assumption=\count287
 \c@proposition=\count288
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/footmisc/footmisc.sty
 Package: footmisc 2023/07/05 v6.0f a miscellany of footnote facilities
 \FN@temptoken=\toks28
-\footnotemargin=\dimen179
-\@outputbox@depth=\dimen180
+\footnotemargin=\dimen177
+\@outputbox@depth=\dimen178
 Package footmisc Info: Declaring symbol style bringhurst on input line 696.
 Package footmisc Info: Declaring symbol style chicago on input line 704.
 Package footmisc Info: Declaring symbol style wiley on input line 713.
@@ -274,14 +261,14 @@ Package: setspace 2022/12/04 v6.7b set line spacing
 Package: caption 2023/03/12 v3.6j Customizing captions (AR)
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
-\caption@tempdima=\dimen181
-\captionmargin=\dimen182
-\caption@leftmargin=\dimen183
-\caption@rightmargin=\dimen184
-\caption@width=\dimen185
-\caption@indent=\dimen186
-\caption@parindent=\dimen187
-\caption@hangindent=\dimen188
+\caption@tempdima=\dimen179
+\captionmargin=\dimen180
+\caption@leftmargin=\dimen181
+\caption@rightmargin=\dimen182
+\caption@width=\dimen183
+\caption@indent=\dimen184
+\caption@parindent=\dimen185
+\caption@hangindent=\dimen186
 Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count289
@@ -293,7 +280,7 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
 ) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen189
+\rotheadsize=\dimen187
 \c@nlinenum=\count291
 \TeXr@lab=\toks29
 ) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -331,7 +318,7 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
 \c@section@level=\count292
 )
-\@linkdim=\dimen190
+\@linkdim=\dimen188
 \Hy@linkcounter=\count293
 \Hy@pagecounter=\count294
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
@@ -361,15 +348,15 @@ Package hyperref Info: Bookmarks ON on input line 4434.
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4772.
-\XeTeXLinkMargin=\dimen191
+\XeTeXLinkMargin=\dimen189
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
 \Fld@menulength=\count297
-\Field@Width=\dimen192
-\Fld@charsize=\dimen193
+\Field@Width=\dimen190
+\Fld@charsize=\dimen191
 Package hyperref Info: Hyper figures OFF on input line 6051.
 Package hyperref Info: Link nesting OFF on input line 6056.
 Package hyperref Info: Hyper index ON on input line 6059.
@@ -402,6 +389,19 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip62
+) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+(/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+(/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen192
+\Gin@req@width=\dimen193
 ) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/siunitx/siunitx.sty
 Package: siunitx 2023-06-12 v3.2.6 A comprehensive (SI) units package
 \l__siunitx_angle_tmp_dim=\dimen194
@@ -514,7 +514,7 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count322
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 119.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 106.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -528,24 +528,24 @@ LaTeX Warning: Label `simplicity' multiply defined.
 )
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -591,111 +591,123 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 119.
+Package hyperref Info: Link coloring OFF on input line 106.
 (./paper.out) (./paper.out)
 \@outlinefile=\write3
 \openout3 = `paper.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 121.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 108.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 121.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 108.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 121.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 108.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 121.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 108.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 121.
+(Font)              <14.4> on input line 108.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 121.
+(Font)              <10> on input line 108.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 121.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 121.
+(Font)              <7> on input line 108.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 108.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 121.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 108.
 (/Users/jimenagalindo/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 135.
+(Font)              <12> on input line 122.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 135.
+(Font)              <8> on input line 122.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 135.
+(Font)              <6> on input line 122.
 [1
 
 {/Users/jimenagalindo/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 250--251
+Underfull \hbox (badness 10000) in paragraph at lines 237--238
 
  []
 
 [4]
-<../diagram_polariazation_2variables.png, id=96, 487.8225pt x 389.455pt>
+<../diagram_polariazation_2variables.png, id=100, 487.8225pt x 389.455pt>
 File: ../diagram_polariazation_2variables.png Graphic file (type png)
 <use ../diagram_polariazation_2variables.png>
-Package pdftex.def Info: ../diagram_polariazation_2variables.png  used on input line 294.
-(pdftex.def)             Requested size: 236.01303pt x 188.42192pt.
+Package pdftex.def Info: ../diagram_polariazation_2variables.png  used on input line 281.
+(pdftex.def)             Requested size: 306.81741pt x 244.9479pt.
 [5 <../diagram_polariazation_2variables.png>]
-Overfull \hbox (4.4947pt too wide) in paragraph at lines 358--359
+Overfull \hbox (4.4947pt too wide) in paragraph at lines 345--346
 []\T1/lmr/m/n/12 Mean  
  []
 
 
-Overfull \hbox (4.4947pt too wide) in paragraph at lines 374--375
+Overfull \hbox (4.4947pt too wide) in paragraph at lines 361--362
 []\T1/lmr/m/n/12 Mean  
  []
 
 [6] [7] [8]
-<../computed_objects/figures/learning_all.png, id=133, 542.025pt x 361.35pt>
+<../computed_objects/figures/learning_all.png, id=137, 542.025pt x 361.35pt>
 File: ../computed_objects/figures/learning_all.png Graphic file (type png)
 <use ../computed_objects/figures/learning_all.png>
-Package pdftex.def Info: ../computed_objects/figures/learning_all.png  used on input line 474.
-(pdftex.def)             Requested size: 236.01881pt x 157.34587pt.
-<../computed_objects/figures/p2_correct_rounds.png, id=135, 474.0912pt x 361.35pt>
+Package pdftex.def Info: ../computed_objects/figures/learning_all.png  used on input line 461.
+(pdftex.def)             Requested size: 306.81741pt x 204.54909pt.
+<../computed_objects/figures/p2_correct_rounds.png, id=139, 474.0912pt x 361.35pt>
 File: ../computed_objects/figures/p2_correct_rounds.png Graphic file (type png)
 <use ../computed_objects/figures/p2_correct_rounds.png>
-Package pdftex.def Info: ../computed_objects/figures/p2_correct_rounds.png  used on input line 499.
-(pdftex.def)             Requested size: 236.01778pt x 179.8916pt.
+Package pdftex.def Info: ../computed_objects/figures/p2_correct_rounds.png  used on input line 486.
+(pdftex.def)             Requested size: 306.81741pt x 233.86569pt.
 [9 <../computed_objects/figures/learning_all.png>]
-<../computed_objects/figures/revealed_variables_pooled.png, id=144, 462.528pt x 346.896pt>
+<../computed_objects/figures/revealed_available.png, id=149, 462.528pt x 346.896pt>
+File: ../computed_objects/figures/revealed_available.png Graphic file (type png)
+<use ../computed_objects/figures/revealed_available.png>
+Package pdftex.def Info: ../computed_objects/figures/revealed_available.png  used on input line 512.
+(pdftex.def)             Requested size: 306.81741pt x 230.12186pt.
+<../computed_objects/figures/revealed_variables_pooled.png, id=150, 462.528pt x 346.896pt>
 File: ../computed_objects/figures/revealed_variables_pooled.png Graphic file (type png)
 <use ../computed_objects/figures/revealed_variables_pooled.png>
-Package pdftex.def Info: ../computed_objects/figures/revealed_variables_pooled.png  used on input line 520.
-(pdftex.def)             Requested size: 236.02025pt x 177.01518pt.
-[10 <../computed_objects/figures/p2_correct_rounds.png> <../computed_objects/figures/revealed_variables_pooled.png>] (./paper.bbl [11]) [12] (./paper.aux)
+Package pdftex.def Info: ../computed_objects/figures/revealed_variables_pooled.png  used on input line 521.
+(pdftex.def)             Requested size: 306.81741pt x 230.12186pt.
+[10 <../computed_objects/figures/p2_correct_rounds.png>] [11 <../computed_objects/figures/revealed_available.png> <../computed_objects/figures/revealed_variables_pooled.png>]
+
+LaTeX Warning: Reference `hypotheses' on page 12 undefined on input line 719.
+
+[12] [13] (./paper.bbl [14]) [15] (./paper.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-06-30>
  ***********
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 0AD2C7CEE1991501C1A16E752EC1BA5F;1454.
+(rerunfilecheck)             Checksum: 8434A9B5BD012A31E14A6D4AC09B6093;1539.
  ) 
 Here is how much of TeX's memory you used:
- 17334 strings out of 477197
- 317460 string characters out of 5812439
- 1936244 words of memory out of 5000000
- 37998 multiletter control sequences out of 15000+600000
+ 17363 strings out of 477197
+ 318314 string characters out of 5812439
+ 1943244 words of memory out of 5000000
+ 38015 multiletter control sequences out of 15000+600000
  658682 words of font info for 98 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,13n,79p,368b,1022s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on paper.pdf (12 pages, 468235 bytes).
+Output written on paper.pdf (15 pages, 497156 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 200 compressed objects within 2 object streams
- 48 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 294 PDF objects out of 1000 (max. 8388607)
+ 229 compressed objects within 3 object streams
+ 60 named destinations out of 1000 (max. 500000)
+ 130 words of extra memory for PDF output out of 10000 (max. 10000000)
 
