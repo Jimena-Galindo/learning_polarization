@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  14 JUL 2023 18:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.10)  16 JUL 2023 17:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -525,6 +525,9 @@ File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 
 LaTeX Warning: Label `simplicity' multiply defined.
 
+
+LaTeX Warning: Label `polarization' multiply defined.
+
 )
 \openout1 = `paper.aux'.
 
@@ -677,18 +680,45 @@ File: ../computed_objects/figures/revealed_variables_pooled.png Graphic file (ty
 <use ../computed_objects/figures/revealed_variables_pooled.png>
 Package pdftex.def Info: ../computed_objects/figures/revealed_variables_pooled.png  used on input line 521.
 (pdftex.def)             Requested size: 306.81741pt x 230.12186pt.
-[10 <../computed_objects/figures/p2_correct_rounds.png>] [11 <../computed_objects/figures/revealed_available.png> <../computed_objects/figures/revealed_variables_pooled.png>]
-
-LaTeX Warning: Reference `hypotheses' on page 12 undefined on input line 719.
-
-[12] [13] (./paper.bbl [14]) [15] (./paper.aux)
+[10 <../computed_objects/figures/p2_correct_rounds.png>] [11 <../computed_objects/figures/revealed_available.png> <../computed_objects/figures/revealed_variables_pooled.png>] [12]
+<../computed_objects/figures/model_count.png, id=178, 462.528pt x 346.896pt>
+File: ../computed_objects/figures/model_count.png Graphic file (type png)
+<use ../computed_objects/figures/model_count.png>
+Package pdftex.def Info: ../computed_objects/figures/model_count.png  used on input line 748.
+(pdftex.def)             Requested size: 306.81741pt x 230.12186pt.
+<../computed_objects/figures/p1_performance_throughout.png, id=180, 443.7378pt x 361.35pt>
+File: ../computed_objects/figures/p1_performance_throughout.png Graphic file (type png)
+<use ../computed_objects/figures/p1_performance_throughout.png>
+Package pdftex.def Info: ../computed_objects/figures/p1_performance_throughout.png  used on input line 766.
+(pdftex.def)             Requested size: 306.81741pt x 249.86108pt.
+[13] [14 <../computed_objects/figures/model_count.png> <../computed_objects/figures/p1_performance_throughout.png>]
+<../computed_objects/figures/model_choices_2vars.png, id=202, 1806.75pt x 1084.05pt>
+File: ../computed_objects/figures/model_choices_2vars.png Graphic file (type png)
+<use ../computed_objects/figures/model_choices_2vars.png>
+Package pdftex.def Info: ../computed_objects/figures/model_choices_2vars.png  used on input line 784.
+(pdftex.def)             Requested size: 306.81741pt x 184.08757pt.
+<../computed_objects/figures/polarization.png, id=204, 361.35pt x 216.81pt>
+File: ../computed_objects/figures/polarization.png Graphic file (type png)
+<use ../computed_objects/figures/polarization.png>
+Package pdftex.def Info: ../computed_objects/figures/polarization.png  used on input line 807.
+(pdftex.def)             Requested size: 306.81741pt x 184.09087pt.
+[15 <../computed_objects/figures/model_choices_2vars.png>]
+<../computed_objects/figures/polarization_rounds_predicted.png, id=214, 480.5955pt x 361.35pt>
+File: ../computed_objects/figures/polarization_rounds_predicted.png Graphic file (type png)
+<use ../computed_objects/figures/polarization_rounds_predicted.png>
+Package pdftex.def Info: ../computed_objects/figures/polarization_rounds_predicted.png  used on input line 832.
+(pdftex.def)             Requested size: 306.81741pt x 230.68977pt.
+[16 <../computed_objects/figures/polarization.png>]
+<../computed_objects/figures/model_choices_all.png, id=223, 1806.75pt x 1084.05pt>
+File: ../computed_objects/figures/model_choices_all.png Graphic file (type png)
+<use ../computed_objects/figures/model_choices_all.png>
+Package pdftex.def Info: ../computed_objects/figures/model_choices_all.png  used on input line 1074.
+(pdftex.def)             Requested size: 306.81741pt x 184.08757pt.
+(./paper.bbl [17 <../computed_objects/figures/polarization_rounds_predicted.png>]) [18] [19 <../computed_objects/figures/model_choices_all.png>] (./paper.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-06-30>
  ***********
-
-LaTeX Warning: There were undefined references.
-
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -696,18 +726,18 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 8434A9B5BD012A31E14A6D4AC09B6093;1539.
  ) 
 Here is how much of TeX's memory you used:
- 17363 strings out of 477197
- 318314 string characters out of 5812439
+ 17451 strings out of 477197
+ 322401 string characters out of 5812439
  1943244 words of memory out of 5000000
- 38015 multiletter control sequences out of 15000+600000
+ 38091 multiletter control sequences out of 15000+600000
  658682 words of font info for 98 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,13n,79p,368b,1022s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></Users/jimenagalindo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on paper.pdf (15 pages, 497156 bytes).
+Output written on paper.pdf (19 pages, 756142 bytes).
 PDF statistics:
- 294 PDF objects out of 1000 (max. 8388607)
- 229 compressed objects within 3 object streams
- 60 named destinations out of 1000 (max. 500000)
- 130 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 340 PDF objects out of 1000 (max. 8388607)
+ 259 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 160 words of extra memory for PDF output out of 10000 (max. 10000000)
 

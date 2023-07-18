@@ -6,16 +6,16 @@
 \cr \cline{1-2}
 \\[-1.8ex] & (1) \\
 \hline \\[-1.8ex]
- C(predicted_polarization)[T.1.0] & 0.092$^{***}$ \\
+ C(predicted_polarization)[T.1.0] & 0.054$^{}$ \\
   & (0.034) \\
- Intercept & 0.398$^{***}$ \\
+ Intercept & 0.414$^{***}$ \\
   & (0.022) \\
 \hline \\[-1.8ex]
  Observations & 870 \\
- $R^2$ & 0.008 \\
- Adjusted $R^2$ & 0.007 \\
- Residual Std. Error & 0.494(df = 868)  \\
- F Statistic & 7.253$^{***}$ (df = 1.0; 868.0) \\
+ $R^2$ & 0.003 \\
+ Adjusted $R^2$ & 0.002 \\
+ Residual Std. Error & 0.496(df = 868)  \\
+ F Statistic & 2.466$^{}$ (df = 1.0; 868.0) \\
 \hline
 \hline \\[-1.8ex]
 \textit{Note:} & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\

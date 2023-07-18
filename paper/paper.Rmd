@@ -89,22 +89,24 @@ An observable variable $x_i$ is *relevant* if the associated coefficient, $a_i$,
 Likewise, variable $i$ is *irrelevant* if $a_i = 0$. We call the set of relevant variables $\mathcal{R}$ and the set of 
 irrelevant variables $\mathcal{I}$.
 
-In each period, an agent observes the realization of all observable variables and predicts the state. Their flow payoff in 
+In each period, an agent observes the realization of all variables and predicts the state. Their flow payoff in 
 period $t$ is 1 if they predict the state correctly, and it is zero otherwise. Denote the prediction by $\hat{y}$. 
 
 In order to make a prediction, the agent uses a map $M_t\to \{\textbf{B}, \textbf{R}\}$  where 
 $M_t \subseteq \{x_1, x_2, ..., x_N\}$ is the set of variables that they choose to consider in period $t$. 
-Our main object of study is the set of variables that the agent decides to consider in a given period, and the procedure by 
-which the maping or the set are updated. We refer to the set of variables that are taken into consideration, $M_t$, as the agent's 
+Our main object of study is the set of variables that the agent decides to consider in a given period. We
+abstract away from the procedure by which the maping and the set are updated. 
+We refer to the set of variables that are taken into consideration, $M_t$, as the agent's 
 *mental model*, and assume that the mapping is linear.  
 
 A mental model is *simple* if it does not include all the relevant variables, 
-*i.e.* if $M\subset \mathcal{R}$. And it is *complex* if it includes all relevant variables, $M=\mathcal{R}$. In 
-addition, mental models can be ranked in terms of their simplicity by the number of relevant variables that they consider. 
+*i.e.* if $M\subset \mathcal{R}$. And it is *complex* if it includes all relevant variables, ($\mathcal{R}\subseteq M$). 
+Mental models can be ranked in terms of their simplicity by the number of relevant variables that they consider: a model that 
+considers only $x_1$ is simpler than one that considers $x_2$ and $x_3$. 
 
-Whenever agents use simple models, they ignore some of the relevant information that is available to them.
-In contrast, whenever agents use complex models, they use all the relevant information available. This means that when agents 
-with complex mental models are restricted in terms of how many variables they can consider, their ability
+Agents that use simple models ignore some of the relevant information that is available to them. While agents who use comples models
+use all of the relevant information.
+This means that when agents with complex mental models are restricted in terms of how many variables they can consider, their ability
 to predict the state will be impaired. On the contrary, restricting the number of variables that an agent with a simple model can 
 use, does not necessarily affect their ability to predict the state. In particular, if they are considering fewer variables than 
 what the restriciton allows, their predictions should be as accurate as without the restriciton. These two effects are captured in 
@@ -204,8 +206,10 @@ different models of the world, are facing a realization of observables that pola
 data <- fread(here("data", "clean", "all.csv"))
 part1 <- fread(here("data", "clean", "part1.csv"))
 part2 <- fread(here("data", "clean", "part2.csv"))
-
+count_models <- fread(here("data", "clean", "count_models.csv"))
+pairs <- fread(here("data", "clean", "pairs.csv"))
 ```
+
 
 Subjects for the experimet were recruited from NYU's CESS-lab subject pool. 
 We recruited `r data[, uniqueN(participant.code)]` undergraduate students who participated in this experiment in person 
@@ -391,7 +395,7 @@ caption(test_revealed) <- "Hypothesis tests for the regression with the number o
 
 We are interested in testing whether the probability of guessing the state correctly increases when subjects are allowed to 
 disclose an additional variable. This corresponds to testing the linear hypotheses $\beta_{m+1}-\beta_m=0$ for $m=1, 2, 3, 4$.
-The results of these tests are presented in Table \ref{hypotheses}. We see that the probability of guessing the state when subjects
+We see that the probability of guessing the state when subjects
 are allowed to disclose 2 variables is significantly higher than when they are allowed to disclose only 1 variable. And the effect 
 of having access to the additional variable is `r results_tbl4[2, Estimate]` percentage points. Allowing 3, 4 and 5 variables has no 
 effect, which sugests that subjects are using models that consider 2 variables. All the hypothesis tests are reported in 
@@ -403,10 +407,64 @@ Tables \ref{test_assigned},\ref{test_revealed} and \ref{test_clustered} in the a
 Since we now know that subjects are using models that consider 2 variables, we can look at the specific models that they are using.
 We look at two particular features: Are they choosing the most informative models? and do they improve their model choices over time?
 
+Conditional on the number of variables that they were allowed to disclose, subjects explore an average of 
+`r mean(count_models$number_models)` models thoughout the experiment\footnote{When there are 5 single-variable models, 10 models 
+for 2 and 3 variables each, 5 models that consider 4 variables plus the complex and the empty models for an average of 22.2 
+possible models to choose from in each round}. 
+Figure \ref{modelCount} shows the distribution of the number of models
+that subjects explored for each number of allowed variables. For the majority of subjects we do not see wide exploration across
+models, which suggests some level of stickiness in their model choices. 
 
+```{r modelCount, out.width='65%', fig.align='center', fig.cap='\\label{modelCount} Distribution of the number of models explored by number of allowed variables'}
+knitr::include_graphics(here("computed_objects", "figures", "model_count.png"))
+```
+
+We also look at the informativeness of the models that subjects chose to explore. Figure \ref{modelInformativeness} shows how the 
+average informativeness of the chose models changed across rounds. For all numbers of allowed variables, the average informativeness
+stays relatively constant throughout the experiment. This suggests that subjects are not learning to choose more informative models, 
+which is also consitent with the fact that the fact that our subjecst are not exploring a wide range of models.
+
+```{r modelInformativeness, out.width='65%', fig.align='center', fig.cap='\\label{modelInformativeness} Average informativeness of the models chosen by number of allowed variables'}
+knitr::include_graphics(here("computed_objects", "figures", "p1_performance_throughout.png"))
+```
+
+If we focus our attention at only the rounds in which they could disclose up to 2 variables, we see high heterogeneity in the model 
+choices. This heterogeneity does not decrease over time. The bottom panel of Figure \ref{modelChoices} shows the distribution of 
+the models that subjects chose in such rounds. The top pannel shows the comparison between the informativeness of the model and 
+the share of correct guesses for subjects who chose that model.
+Figure \ref{modelChoicesAll} in the appendix shows the distribution for all possible models.
+
+```{r modelChoices, out.width='65%', fig.align='center', fig.cap='\\label{modelChoices} Distribution of the models chosen'}
+knitr::include_graphics(here("computed_objects", "figures", "model_choices_2vars.png"))
+```
+
+Put together with the fact that subjects continue to learn and predict better throughout the experiment, this suggests that 
+they become better at using the same mental models, and not that they are learning to use more informative models.
 
 ## Polarization Results
+As for polarization, we see that it arises in `r pairs[predicted_polarization==TRUE & round_number_modif>40, mean(polarized)]` of the guesses in which 
+it was predicted. While it arises only in `r pairs[predicted_polarization==FALSE & round_number_modif>40, mean(polarized)]` of the guesses in which it 
+was not predicted\footnote{We use all the data after 20 rounds of part 2 to allow for some learning on how to select models}. 
+This difference is statistically significant 
+(p-value = `r t.test(pairs[predicted_polarization==TRUE & round_number_modif>40, polarized], pairs[predicted_polarization==FALSE & round_number_modif>40, polarized])$p.value`).
 
+```{r polarization, out.width='65%', fig.align='center', fig.cap='\\label{polarization} Polarization by whether it was predicted or not'}
+knitr::include_graphics(here("computed_objects", "figures", "polarization.png"))
+```
+
+The prediction is that 100% of the pairs would be polarized whenever the optimal rules for their models predict polarization and 
+none of them would be when it is not predicted. There are two factors that may influence the difference with our results. The first 
+is that subjects might not have converged to the optimal rules for the models that they selected. This would induce discrepancy with 
+the prediciton. The other is that we use take the varaibles that they chose to disclose in that round as the model that they are 
+using. However, from the discussion in the previous section we know that even though subjects are disclosing several variables, 
+they do not necessarily use the extra information. This would induce discrepancy with the prediction as well. Nonetheless, we 
+take the fact that polarization is higher when predicted by the theory as an indication that subjects are using simple models to 
+some extent. Figure \ref{polarizationRounds} shows the share of polarized pairs by whether polarization was predicted or not 
+across rounds.
+
+```{r polarizationRounds, out.width='65%', fig.align='center', fig.cap='\\label{polarizationRounds} Polarization by whether it was predicted or not'}
+knitr::include_graphics(here("computed_objects", "figures", "polarization_rounds_predicted.png"))
+```
 
 # Conclusion
 
@@ -415,8 +473,14 @@ We look at two particular features: Are they choosing the most informative model
 \appendix
 
 # Appendix
-```{r appendix}
+```{r TestTables}
 test_revealed
 test_assigned
 test_clustered
 ```
+
+```{r modelChoicesAll, out.width='65%', fig.align='center', fig.cap='\\label{modelChoicesAll} Distribution of the models chosen'}
+knitr::include_graphics(here("computed_objects", "figures", "model_choices_all.png"))
+```
+
+

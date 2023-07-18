@@ -37,4 +37,8 @@ plt.title('Number of models that were used at least once by a subject')
 plt.savefig('computed_objects/figures/model_count.png') 
 
 
+path_models = Path('data/clean/count_models.csv')  
+path_models.parent.mkdir(parents=True, exist_ok=True)  
+count_models.to_csv(path_models)
+
 

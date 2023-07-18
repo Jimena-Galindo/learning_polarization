@@ -7,6 +7,7 @@ part1 = data/clean/part1.csv
 part2 = data/clean/part2.csv
 all = data/clean/all.csv
 pairs = data/clean/pairs.csv
+count_models = data/clean/count_models.csv
 
 # initialize clean_data as empty
 clean_data = 
@@ -15,9 +16,10 @@ clean_data += $(part1)
 clean_data += $(part2)
 clean_data += $(all)
 clean_data += $(pairs)
+clean_data += $(count_models)
 
 # recipe that describes how to build the files from the raw data
-$(part1) $(part2) $(all) $(pairs): data/raw/Part1_2023-06-05.csv data/raw/Part2_2023-06-05.csv data/raw/Part1_2023-06-08_1.csv data/raw/Part2_2023-06-08_1.csv $(model_accuracy) data/scripts/clean_data.py
+$(part1) $(part2) $(all) $(pairs) $(count_models): data/raw/Part1_2023-06-05.csv data/raw/Part2_2023-06-05.csv data/raw/Part1_2023-06-08_1.csv data/raw/Part2_2023-06-08_1.csv $(model_accuracy) data/scripts/clean_data.py
 	@echo "Cleaning our first file!"
 	python data/scripts/clean_data.py
 
@@ -188,7 +190,7 @@ plots_clean:
 # Writeup
 ###############################################
 
-paper: paper/paper.Rmd paper/compile_paper.R $(plots) paper/extra_header.tex $(regressions) $(hypothesis_tests)
+paper: paper/paper.Rmd paper/compile_paper.R $(plots) paper/extra_header.tex $(regressions) $(hypothesis_tests) $(clean_data)
 	@echo "Compile the paper"
 	@Rscript paper/compile_paper.R
 

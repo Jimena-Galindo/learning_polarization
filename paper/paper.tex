@@ -101,7 +101,7 @@
 
 \title{Learning from Data Through Models}
 \author{Alberto Bisin, Guillaume Frechette and Jimena Galindo}
-\date{July 14, 2023}
+\date{July 16, 2023}
 
 \begin{document}
 \maketitle
@@ -715,8 +715,7 @@ column clusters standard errors at the group level.
 We are interested in testing whether the probability of guessing the
 state correctly increases when subjects are allowed to disclose an
 additional variable. This corresponds to testing the linear hypotheses
-\(\beta_{m+1}-\beta_m=0\) for \(m=1, 2, 3, 4\). The results of these
-tests are presented in Table \ref{hypotheses}. We see that the
+\(\beta_{m+1}-\beta_m=0\) for \(m=1, 2, 3, 4\). We see that the
 probability of guessing the state when subjects are allowed to disclose
 2 variables is significantly higher than when they are allowed to
 disclose only 1 variable. And the effect of having access to the
@@ -734,8 +733,108 @@ variables, we can look at the specific models that they are using. We
 look at two particular features: Are they choosing the most informative
 models? and do they improve their model choices over time?
 
+Conditional on the number of variables that they were allowed to
+disclose, subjects explore an average of 2.8 models thoughout the
+experiment\footnote{When there are 5 single-variable models, 10 models 
+for 2 and 3 variables each, 5 models that consider 4 variables plus the complex and the empty models for an average of 22.2 
+possible models to choose from in each round}. Figure \ref{modelCount}
+shows the distribution of the number of models that subjects explored
+for each number of allowed variables. For the majority of subjects we do
+not see wide exploration across models, which suggests some level of
+stickiness in their model choices.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.65\linewidth]{../computed_objects/figures/model_count} 
+
+}
+
+\caption{\label{modelCount} Distribution of the number of models explored by number of allowed variables}\label{fig:modelCount}
+\end{figure}
+
+We also look at the informativeness of the models that subjects chose to
+explore. Figure \ref{modelInformativeness} shows how the average
+informativeness of the chose models changed across rounds. For all
+numbers of allowed variables, the average informativeness stays
+relatively constant throughout the experiment. This suggests that
+subjects are not learning to choose more informative models, which is
+also consitent with the fact that the fact that our subjecst are not
+exploring a wide range of models.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.65\linewidth]{../computed_objects/figures/p1_performance_throughout} 
+
+}
+
+\caption{\label{modelInformativeness} Average informativeness of the models chosen by number of allowed variables}\label{fig:modelInformativeness}
+\end{figure}
+
+If we focus our attention at only the rounds in which they could
+disclose up to 2 variables, we see high heterogeneity in the model
+choices. This heterogeneity does not decrease over time. The bottom
+panel of Figure \ref{modelChoices} shows the distribution of the models
+that subjects chose in such rounds. The top pannel shows the comparison
+between the informativeness of the model and the share of correct
+guesses for subjects who chose that model. Figure \ref{modelChoicesAll}
+in the appendix shows the distribution for all possible models.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.65\linewidth]{../computed_objects/figures/model_choices_2vars} 
+
+}
+
+\caption{\label{modelChoices} Distribution of the models chosen}\label{fig:modelChoices}
+\end{figure}
+
+Put together with the fact that subjects continue to learn and predict
+better throughout the experiment, this suggests that they become better
+at using the same mental models, and not that they are learning to use
+more informative models.
+
 \hypertarget{polarization-results}{%
 \subsection{Polarization Results}\label{polarization-results}}
+
+As for polarization, we see that it arises in 0.5 of the guesses in
+which it was predicted. While it arises only in 0.41 of the guesses in
+which it was not
+predicted\footnote{We use all the data after 20 rounds of part 2 to allow for some learning on how to select models}.
+This difference is statistically significant (p-value = 0.03).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.65\linewidth]{../computed_objects/figures/polarization} 
+
+}
+
+\caption{\label{polarization} Polarization by whether it was predicted or not}\label{fig:polarization}
+\end{figure}
+
+The prediction is that 100\% of the pairs would be polarized whenever
+the optimal rules for their models predict polarization and none of them
+would be when it is not predicted. There are two factors that may
+influence the difference with our results. The first is that subjects
+might not have converged to the optimal rules for the models that they
+selected. This would induce discrepancy with the prediciton. The other
+is that we use take the varaibles that they chose to disclose in that
+round as the model that they are using. However, from the discussion in
+the previous section we know that even though subjects are disclosing
+several variables, they do not necessarily use the extra information.
+This would induce discrepancy with the prediction as well. Nonetheless,
+we take the fact that polarization is higher when predicted by the
+theory as an indication that subjects are using simple models to some
+extent. Figure \ref{polarizationRounds} shows the share of polarized
+pairs by whether polarization was predicted or not across rounds.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.65\linewidth]{../computed_objects/figures/polarization_rounds_predicted} 
+
+}
+
+\caption{\label{polarizationRounds} Polarization by whether it was predicted or not}\label{fig:polarizationRounds}
+\end{figure}
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
@@ -969,6 +1068,15 @@ models? and do they improve their model choices over time?
 
 \end{table}
  
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.65\linewidth]{../computed_objects/figures/model_choices_all} 
+
+}
+
+\caption{\label{modelChoicesAll} Distribution of the models chosen}\label{fig:modelChoicesAll}
+\end{figure}
 
   \bibliography{bibliography.bib}
 
