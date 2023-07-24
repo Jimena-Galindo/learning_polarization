@@ -119,25 +119,20 @@ increase the frequency with which they make correct predictions.
 will not increase the frequency with which they make correct predictions.
 
 ## Optimal Rules
-Conditional of using a particular mental model, the most accurate prediction rule that the agent can use is one that 
-predicts the state to be **B** whenever, given the observables under consideration, **B** is more likely. 
-And it predicts **R** whenever **R** is more likely. Because we abstract away from the procedure through which the rule is updated, 
-we will make predictions under the assumption that the agent has learned the parameters perfectly. That is, 
+Regardless of the particular model used by an agent agent, hty can maximize the probability of guessing the state correctly by 
+predicting the state to be **B** whenever it is more likely to be the true state than **R**. 
+In computing the relevant probabilities, uses only the variables that their mental model considers and hence is sometimes wrong. 
+
+Because we abstract away from the procedure through which the rule is updated, 
+we will make predictions under the assumption that the agent has learned the parameters of their mental model perfectly. That is, 
 they have seen enough information that, under an updating procedure that converges to the truth---for example, 
 correctly specified regression model or Bayes rule---they would have converged to the true parameters already. This provides an 
-upper bound for how well any model can perform. 
+upper bound for how well thier model can perform.In addition, we assume that the mental model is a linear rule that partitions 
+the space under consideration into two. 
 
-We refer to a prediction rule as an *Optimal Rule* if it is the rule that a fully rational agent would 
-converge to with perfect Bayesian learning. In this context, Bayesian learning corresponds to using Bayes rule to 
-learn the coefficients $a = (a_1, a_2, ..., a_N)$ as well as the constant $K$. This means that in an $N$ dimensional 
-space, the agent must learn $N+1$ parameters which corresponds to learning the halfspace in which the state 
-is **B**. The optimal rule for the complex model coincides with the true data-generating process when learning 
-is perfect and the parameters are identified.
-
-An optimal rule conditional on model $M$ is the rule that, when restricted to the 
-variables being considered, does the best at predicting the state. In this case, the agent is learning only 
-the parameters that pertain the variables in $M$ plus a constant term. The following proposition illustrates exactly 
-what the optimal prediction rules look like when the agent is able to learn perfectly. 
+For any given model, the *Optimal Rule* maps the varaibles under consideration to the most likely state. 
+The optimal rule for the complex modelcoincides with the true data-generating process and predicts the state correctly 100%
+of the time, while the optimal rules for simple models maximize the chance of guessing correctly conditonal on limited information.
 
 \begin{proposition}
 Fix any model that considers $m\leq N$ variables and relabel the variable so that $x_1, ..., x_m$ are the variables 
